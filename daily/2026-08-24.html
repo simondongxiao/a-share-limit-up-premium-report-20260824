@@ -27,6 +27,9 @@
     .rules { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
     .rule { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:14px; }
     .rule h3 { margin:0 0 8px; font-size:16px; } .rule p { margin:8px 0 0; color:#c2cee2; }
+    .score-notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .score-note { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .score-note h3 { margin:0 0 8px; font-size:16px; } .score-note p { margin:0; color:#c2cee2; }
     .toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
     input, button { border:1px solid #263651; border-radius:6px; background:#0b1222; color:var(--txt); padding:8px 10px; }
     input { min-width:280px; flex:1; }
@@ -42,7 +45,7 @@
     .tag.mid { color:#ffd67a; background:rgba(240,180,41,.12); border:1px solid rgba(240,180,41,.35); }
     .tag.bad { color:#ff9ca0; background:rgba(245,72,77,.13); border:1px solid rgba(245,72,77,.35); }
     .footer { color:var(--dim); font-size:12px; text-align:center; margin-top:18px; }
-    @media (max-width:960px) { .metrics,.rules { grid-template-columns:1fr; } h1 { font-size:26px; } }
+    @media (max-width:960px) { .metrics,.rules,.score-notes { grid-template-columns:1fr; } h1 { font-size:26px; } }
   </style>
 </head>
 <body>
@@ -51,7 +54,7 @@
     <h1>2026-08-24 涨停/炸板打板决策</h1>
     <p class="lead">本页回答两个不同问题：今天盘中打板/炸板动作是否合理，以及盘后看明天是否可能没有溢价。龙虎榜只作为盘后次日风险特征，不倒推盘中打板信号。</p>
     <div class="meta">
-      <span>生成时间：2026-08-24 23:37:54</span>
+      <span>生成时间：2026-08-25 11:39:25</span>
       <span>明细CSV：D:\codex\outputs\limit_up_daily_decision\2026-08-24\daily_limitup_decision_20260824.csv</span>
       <span>题材热度：化学制药:4；汽车零部:4；电力:3；电池:3；家居用品:2；通用设备:2；一般零售:2；房地产开:2</span>
     </div>
@@ -72,6 +75,38 @@
       <div class="rule"><h3>涨停也可能不能打</h3><p>尾盘封板、反复炸板、后排题材、成交过热、股性差或盘后龙虎榜卖压重，即使封住也可能次日无溢价。</p></div>
     </div>
   </section>
+
+  
+    <section class="panel">
+      <h2>评分规则/备注</h2>
+      <div class="score-notes">
+        <div class="score-note">
+          <h3>市场和情绪</h3>
+          <p>涨停家数>=45 加1分；炸板率<=22% 加1分，>=30% 计入风险；跌停家数>=15 计入风险。市场强不等于全都能打，只是提高封板后溢价环境。</p>
+        </div>
+        <div class="score-note">
+          <h3>封板和板位</h3>
+          <p>09:30前封板加3分且降风险；09:30-10:30加1分；10:30后扣2分并加风险。3板以上加3分，2板加2分，首板默认需要题材、人气和封板质量再确认。</p>
+        </div>
+        <div class="score-note">
+          <h3>炸板处理</h3>
+          <p>未炸板加2分；炸板3-5次扣1分并加风险；5次以上扣2分并加风险。炸板后收盘距离涨停价>-3%仍可观察反包，跌离超过6%按失败属性加重。</p>
+        </div>
+        <div class="score-note">
+          <h3>量价、题材和股性</h3>
+          <p>成交额足够、换手在可承接区间、行业/题材处于今日前排、图形新高或接近高点加分；成交额过低、换手极低/过热、5日涨幅过高、历史同股溢价差则加风险。</p>
+        </div>
+        <div class="score-note">
+          <h3>龙虎榜</h3>
+          <p>龙虎榜是收盘后特征，不倒推为盘中打板理由。盘后净买入、机构净买入、关注席位上榜可降低次日风险；净卖出或卖方集中度明显更高会提高次日无溢价风险。</p>
+        </div>
+        <div class="score-note">
+          <h3>结论边界</h3>
+          <p>“可以打板/谨慎可打/不能打板”是当日信号判断；T+1开盘、最高、收盘只用于之后验证实际溢价，未收盘前保持待验证，不猜最终标签。</p>
+        </div>
+      </div>
+    </section>
+    
 
   <section class="panel">
     <h2>逐股判断</h2>
@@ -1335,7 +1370,7 @@
       </table>
     </div>
   </section>
-  <div class="footer">T+1 尚未发生或行情缺失时，realized_label 保持“待验证/缺失”，不猜测。不是投资建议。</div>
+  <div class="footer">T+1 尚未发生或行情缺失时，实际标签保持“待验证/缺失”，不猜测。不是投资建议。</div>
 </main>
 <script>
 var q = document.getElementById('q');

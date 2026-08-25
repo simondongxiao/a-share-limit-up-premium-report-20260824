@@ -25,6 +25,11 @@
     .metric { border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:14px; min-height:96px; border-top:3px solid var(--cyan); }
     .metric.good { border-top-color:var(--green); } .metric.mid { border-top-color:var(--gold); } .metric.bad { border-top-color:var(--red); } .metric.purple { border-top-color:var(--purple); }
     .metric b { display:block; font-size:26px; } .metric span { display:block; color:var(--sub); } .metric em { display:block; color:var(--dim); font-style:normal; font-size:12px; margin-top:4px; }
+    .view-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; }
+    .view-tabs button { border:1px solid #263651; border-radius:6px; background:#0b1222; color:#cbd7eb; padding:9px 12px; cursor:pointer; }
+    .view-tabs button.active { border-color:var(--gold); color:#fff; background:#1a2438; }
+    .view-panel { display:none; margin-top:16px; }
+    .view-panel.active { display:block; }
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
     .panel { border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:16px; }
     .panel h2 { margin:0 0 12px; font-size:20px; letter-spacing:0; }
@@ -38,6 +43,9 @@
     table { width:100%; border-collapse:collapse; min-width:760px; }
     th,td { padding:9px 10px; border-bottom:1px solid #17233a; text-align:left; }
     th { background:#10182b; color:#9fb2d2; white-space:nowrap; }
+    .frame-tools { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    .frame-tools a { border:1px solid var(--line); background:#0b1222; border-radius:6px; padding:7px 9px; color:#c7d4ea; }
+    .report-frame { width:100%; min-height:920px; border:1px solid var(--line); border-radius:8px; background:#070b14; }
     .footer { color:var(--dim); font-size:12px; text-align:center; margin-top:18px; }
     @media (max-width:960px) { .metrics,.grid { grid-template-columns:1fr; } h1 { font-size:26px; } }
   </style>
@@ -50,8 +58,8 @@
     <p class="lead">这个首页以后显示最新交易日结论，并链接每日明细。盘中可见信号、盘后龙虎榜、T+1 实际收益分开记录；炸板不直接判错，涨停也不自动等于能打。</p>
     <div class="meta">
       <span>最新交易日：2026-08-24</span>
-      <span>生成时间：2026-08-25 11:00:18</span>
-      <span>2026-08-25 11:00，T+1仍在盘中，不能写最终收益标签</span>
+      <span>生成时间：2026-08-25 11:39:34</span>
+      <span>2026-08-25 11:39，T+1仍在盘中，不能写最终收益标签</span>
       <a href="historical_backtest.html">历史回测总报告</a>
       <a href="daily/2026-08-24.html">最新日度明细</a>
     </div>
@@ -64,19 +72,26 @@
     </div>
   </section>
 
-  <section class="grid">
-    <div class="panel"><h2>严格可以打板</h2><div class="chips"><span class='chip'><b>000017</b> 深中华A<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>000931</b> 中 关 村<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002412</b> 汉森制药<em>低/可控 / LHB 0.84亿</em></span></div></div>
-    <div class="panel"><h2>谨慎可打</h2><div class="chips"><span class='chip'><b>000925</b> 众合科技<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002015</b> 协鑫能科<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002084</b> 海鸥住工<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>600785</b> 新华百货<em>低/可控 / LHB -0.09亿</em></span><span class='chip'><b>600604</b> 市北高新<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>601212</b> 白银有色<em>低/可控 / LHB 1.80亿</em></span><span class='chip'><b>002017</b> 东信和平<em>低/可控 / LHB 0.62亿</em></span><span class='chip'><b>603958</b> 哈森股份<em>低/可控 / LHB -0.57亿</em></span><span class='chip'><b>003040</b> 楚天龙<em>低/可控 / LHB 0.06亿</em></span><span class='chip'><b>603200</b> 上海洗霸<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>603089</b> 正裕工业<em>低/可控 / LHB 0.26亿</em></span><span class='chip'><b>600613</b> 神奇制药<em>低/可控 / LHB 0.05亿</em></span><span class='chip'><b>603032</b> 德新科技<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002580</b> 圣阳股份<em>低/可控 / LHB 3.63亿</em></span><span class='chip'><b>002882</b> 金龙羽<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002041</b> 登海种业<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>603105</b> 芯能科技<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>601700</b> 风范股份<em>低/可控 / LHB 1.75亿</em></span><span class='chip more'>还有 1 只，见明细</span></div></div>
-    <div class="panel"><h2>炸板反包/可接受观察</h2><div class="chips"><span class='chip'><b>002703</b> 浙江世宝<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002975</b> 博杰股份<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>301598</b> 博科测试<em>低/可控 / LHB 0.13亿</em></span><span class='chip'><b>601958</b> 金钼股份<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002536</b> 飞龙股份<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002506</b> 协鑫集成<em>中：需看集合竞价承接 / LHB 缺失</em></span><span class='chip'><b>688356</b> 键凯科技<em>低/可控 / LHB 1.49亿</em></span><span class='chip'><b>002192</b> 融捷股份<em>中：需看集合竞价承接 / LHB 缺失</em></span><span class='chip'><b>000603</b> 盛达资源<em>中：需看集合竞价承接 / LHB -2.11亿</em></span></div></div>
-    <div class="panel"><h2>次日无溢价高风险</h2><div class="chips"><span class='chip'><b>002716</b> 湖南白银<em>高：次日无溢价风险高 / LHB -1.98亿</em></span><span class='chip'><b>600367</b> 红星发展<em>高：次日无溢价风险高 / LHB 缺失</em></span><span class='chip'><b>001257</b> 盛龙股份<em>高：次日无溢价风险高 / LHB 0.22亿</em></span><span class='chip'><b>002853</b> 皮阿诺<em>高：次日无溢价风险高 / LHB 缺失</em></span><span class='chip'><b>001230</b> 劲旅环境<em>高：次日无溢价风险高 / LHB 缺失</em></span><span class='chip'><b>688136</b> 科兴制药<em>高：次日无溢价风险高 / LHB 缺失</em></span></div></div>
-  </section>
+  <nav class="view-tabs" aria-label="报告菜单">
+    <button type="button" data-view="summary" class="active">每日结论首页</button>
+    <button type="button" data-view="daily">最新日度明细</button>
+    <button type="button" data-view="history">历史回测</button>
+  </nav>
 
-  <section class="panel archive">
-    <h2>每日结论归档</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>日期</th><th>涨停</th><th>炸板</th><th>跌停</th><th>LHB匹配</th><th>样本</th><th>链接</th></tr></thead>
-        <tbody>
+  <section id="view-summary" class="view-panel active">
+    <section class="grid">
+      <div class="panel"><h2>严格可以打板</h2><div class="chips"><span class='chip'><b>000017</b> 深中华A<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>000931</b> 中 关 村<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002412</b> 汉森制药<em>低/可控 / LHB 0.84亿</em></span></div></div>
+      <div class="panel"><h2>谨慎可打</h2><div class="chips"><span class='chip'><b>002015</b> 协鑫能科<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002084</b> 海鸥住工<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>000925</b> 众合科技<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>600785</b> 新华百货<em>低/可控 / LHB -0.09亿</em></span><span class='chip'><b>600604</b> 市北高新<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>601212</b> 白银有色<em>低/可控 / LHB 1.80亿</em></span><span class='chip'><b>002017</b> 东信和平<em>低/可控 / LHB 0.62亿</em></span><span class='chip'><b>603958</b> 哈森股份<em>低/可控 / LHB -0.57亿</em></span><span class='chip'><b>003040</b> 楚天龙<em>低/可控 / LHB 0.06亿</em></span><span class='chip'><b>603200</b> 上海洗霸<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>603089</b> 正裕工业<em>低/可控 / LHB 0.26亿</em></span><span class='chip'><b>600613</b> 神奇制药<em>低/可控 / LHB 0.05亿</em></span><span class='chip'><b>603032</b> 德新科技<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002580</b> 圣阳股份<em>低/可控 / LHB 3.63亿</em></span><span class='chip'><b>002882</b> 金龙羽<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002041</b> 登海种业<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>603105</b> 芯能科技<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>601700</b> 风范股份<em>低/可控 / LHB 1.75亿</em></span><span class='chip more'>还有 1 只，见明细</span></div></div>
+      <div class="panel"><h2>炸板反包/可接受观察</h2><div class="chips"><span class='chip'><b>002975</b> 博杰股份<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002703</b> 浙江世宝<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>301598</b> 博科测试<em>低/可控 / LHB 0.13亿</em></span><span class='chip'><b>601958</b> 金钼股份<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002536</b> 飞龙股份<em>低/可控 / LHB 缺失</em></span><span class='chip'><b>002506</b> 协鑫集成<em>中：需看集合竞价承接 / LHB 缺失</em></span><span class='chip'><b>688356</b> 键凯科技<em>低/可控 / LHB 1.49亿</em></span><span class='chip'><b>002192</b> 融捷股份<em>中：需看集合竞价承接 / LHB 缺失</em></span><span class='chip'><b>000603</b> 盛达资源<em>中：需看集合竞价承接 / LHB -2.11亿</em></span></div></div>
+      <div class="panel"><h2>次日无溢价高风险</h2><div class="chips"><span class='chip'><b>002716</b> 湖南白银<em>高：次日无溢价风险高 / LHB -1.98亿</em></span><span class='chip'><b>600367</b> 红星发展<em>高：次日无溢价风险高 / LHB 缺失</em></span><span class='chip'><b>001257</b> 盛龙股份<em>高：次日无溢价风险高 / LHB 0.22亿</em></span><span class='chip'><b>002853</b> 皮阿诺<em>高：次日无溢价风险高 / LHB 缺失</em></span><span class='chip'><b>001230</b> 劲旅环境<em>高：次日无溢价风险高 / LHB 缺失</em></span><span class='chip'><b>688136</b> 科兴制药<em>高：次日无溢价风险高 / LHB 缺失</em></span></div></div>
+    </section>
+
+    <section class="panel archive">
+      <h2>每日结论归档</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>日期</th><th>涨停</th><th>炸板</th><th>跌停</th><th>LHB匹配</th><th>样本</th><th>链接</th></tr></thead>
+          <tbody>
             <tr>
               <td>2026-08-24</td>
               <td>46</td>
@@ -87,11 +102,44 @@
               <td><a href="daily/2026-08-24.html">HTML</a> · <a href="daily/2026-08-24.csv">CSV</a></td>
             </tr>
             </tbody>
-      </table>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <section id="view-daily" class="view-panel">
+    <div class="panel">
+      <h2>最新日度明细</h2>
+      <div class="frame-tools">
+        <a href="daily/2026-08-24.html" target="_blank" rel="noopener">单独打开日度明细</a>
+        <a href="daily/2026-08-24.csv" target="_blank" rel="noopener">下载CSV</a>
+      </div>
+      <iframe class="report-frame" src="daily/2026-08-24.html" title="最新日度明细"></iframe>
+    </div>
+  </section>
+
+  <section id="view-history" class="view-panel">
+    <div class="panel">
+      <h2>历史回测</h2>
+      <div class="frame-tools">
+        <a href="historical_backtest.html" target="_blank" rel="noopener">单独打开历史回测</a>
+      </div>
+      <iframe class="report-frame" src="historical_backtest.html" title="历史回测"></iframe>
     </div>
   </section>
 
   <div class="footer">本页为静态 HTML，来自本地留档数据和可审计脚本；不构成投资建议。</div>
 </main>
+<script>
+document.querySelectorAll('.view-tabs button').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.view-tabs button').forEach(function(item) { item.classList.remove('active'); });
+    document.querySelectorAll('.view-panel').forEach(function(panel) { panel.classList.remove('active'); });
+    btn.classList.add('active');
+    var panel = document.getElementById('view-' + btn.dataset.view);
+    if (panel) panel.classList.add('active');
+  });
+});
+</script>
 </body>
 </html>

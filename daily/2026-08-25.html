@@ -36,7 +36,7 @@
     button { cursor:pointer; }
     button.active { border-color:var(--gold); }
     .table-wrap { max-height:760px; overflow:auto; border:1px solid var(--line); border-radius:8px; }
-    table { width:100%; border-collapse:collapse; min-width:1660px; font-size:12px; }
+    table { width:100%; border-collapse:collapse; min-width:1980px; font-size:12px; }
     th,td { padding:8px 9px; border-bottom:1px solid #17233a; text-align:left; vertical-align:top; }
     th { position:sticky; top:0; background:#10182b; z-index:1; color:#9fb2d2; white-space:nowrap; }
     .code { font-family:Consolas, monospace; color:#b7d5ff; }
@@ -54,8 +54,8 @@
     <h1>2026-08-25 涨停/炸板打板决策</h1>
     <p class="lead">本页回答两个不同问题：今天盘中打板/炸板动作是否合理，以及盘后看明天是否可能没有溢价。龙虎榜只作为盘后次日风险特征，不倒推盘中打板信号。</p>
     <div class="meta">
-      <span>生成时间：2026-08-26 00:14:54</span>
-      <span>明细CSV：D:\codex\outputs\limit_up_daily_decision\2026-08-25\daily_limitup_decision_20260825.csv</span>
+      <span>生成时间：2026-08-26 22:08:35</span>
+      <span>明细CSV：同目录 CSV 文件，首页提供下载入口</span>
       <span>题材热度：通用设备:4；一般零售:4；化学制药:4；家居用品:3；种植业:3；汽车零部:3；农化制品:3；化学原料:3</span>
     </div>
     <div class="metrics">
@@ -124,7 +124,8 @@
       <table id="stocks">
         <thead><tr>
           <th>池</th><th>代码</th><th>名称</th><th>板位</th><th>涨跌幅</th><th>首次封板</th><th>炸板</th><th>距涨停</th><th>行业</th>
-          <th>动作结论</th><th>次日风险</th><th>LHB净买</th><th>机构净买</th><th>关注席位</th><th>分数</th><th>原因</th><th>数据缺口</th>
+          <th>动作结论</th><th>次日风险</th><th>实际标签</th><th>T+1开盘</th><th>T+1最高</th><th>T+1收盘</th><th>扣费后开盘</th>
+          <th>LHB净买</th><th>机构净买</th><th>关注席位</th><th>分数</th><th>原因</th><th>数据缺口</th>
         </tr></thead>
         <tbody>
                 <tr data-pool="涨停" data-quality="good" data-risk="good">
@@ -139,6 +140,11 @@
                   <td>通信设备</td>
                   <td><span class="tag good">可以打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>0.0%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>-0.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -159,6 +165,11 @@
                   <td>中药Ⅱ</td>
                   <td><span class="tag good">可以打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>9.1%</td>
+                  <td>10.0%</td>
+                  <td>6.2%</td>
+                  <td>8.9%</td>
                   <td>-1.02亿</td>
                   <td>-0.14亿</td>
                   <td>拉萨系:东方财富证券股份有限公司拉萨金融城南环路证券营业部</td>
@@ -179,6 +190,11 @@
                   <td>饰品</td>
                   <td><span class="tag good">可以打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>2.8%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>2.6%</td>
                   <td>-0.00亿</td>
                   <td>-0.46亿</td>
                   <td></td>
@@ -199,6 +215,11 @@
                   <td>种植业</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-2.9%</td>
+                  <td>-0.5%</td>
+                  <td>-3.8%</td>
+                  <td>-3.1%</td>
                   <td>1.67亿</td>
                   <td>0.01亿</td>
                   <td></td>
@@ -219,6 +240,11 @@
                   <td>化学制药</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>9.8%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -239,6 +265,11 @@
                   <td>医疗器械</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>4.2%</td>
+                  <td>16.1%</td>
+                  <td>6.4%</td>
+                  <td>4.0%</td>
                   <td>0.26亿</td>
                   <td>-0.12亿</td>
                   <td>成都北一环:国泰海通证券股份有限公司成都北一环路证券营业部</td>
@@ -259,6 +290,11 @@
                   <td>汽车零部</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.9%</td>
+                  <td>0.0%</td>
+                  <td>-1.4%</td>
+                  <td>-2.1%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -279,6 +315,11 @@
                   <td>一般零售</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-4.1%</td>
+                  <td>2.4%</td>
+                  <td>-3.1%</td>
+                  <td>-4.3%</td>
                   <td>-0.18亿</td>
                   <td>0.00亿</td>
                   <td></td>
@@ -299,6 +340,11 @@
                   <td>化学制药</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>0.0%</td>
+                  <td>4.6%</td>
+                  <td>1.2%</td>
+                  <td>-0.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -319,6 +365,11 @@
                   <td>家居用品</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>10.1%</td>
+                  <td>10.1%</td>
+                  <td>10.1%</td>
+                  <td>9.9%</td>
                   <td>0.14亿</td>
                   <td>-0.04亿</td>
                   <td></td>
@@ -339,6 +390,11 @@
                   <td>工程机械</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>9.9%</td>
+                  <td>9.9%</td>
+                  <td>-5.7%</td>
+                  <td>9.7%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -359,6 +415,11 @@
                   <td>煤炭开采</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-4.8%</td>
+                  <td>10.0%</td>
+                  <td>5.3%</td>
+                  <td>-5.0%</td>
                   <td>-0.29亿</td>
                   <td>0.00亿</td>
                   <td></td>
@@ -379,6 +440,11 @@
                   <td>通用设备</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>-3.0%</td>
+                  <td>9.8%</td>
                   <td>0.02亿</td>
                   <td>0.00亿</td>
                   <td>宁波分公司:世纪证券有限责任公司宁波分公司</td>
@@ -399,6 +465,11 @@
                   <td>造纸</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.6%</td>
+                  <td>10.2%</td>
+                  <td>10.2%</td>
+                  <td>1.4%</td>
                   <td>0.57亿</td>
                   <td>0.00亿</td>
                   <td></td>
@@ -419,6 +490,11 @@
                   <td>化学原料</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-3.3%</td>
+                  <td>-0.9%</td>
+                  <td>-3.8%</td>
+                  <td>-3.5%</td>
                   <td>0.21亿</td>
                   <td>0.00亿</td>
                   <td></td>
@@ -439,6 +515,11 @@
                   <td>酒店餐饮</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>4.2%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>4.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -459,6 +540,11 @@
                   <td>工程咨询</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.9%</td>
+                  <td>2.7%</td>
+                  <td>-3.3%</td>
+                  <td>1.7%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -479,6 +565,11 @@
                   <td>装修装饰</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.9%</td>
+                  <td>6.4%</td>
+                  <td>2.9%</td>
+                  <td>-1.1%</td>
                   <td>2.68亿</td>
                   <td>-0.07亿</td>
                   <td></td>
@@ -499,6 +590,11 @@
                   <td>中药Ⅱ</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.9%</td>
+                  <td>9.9%</td>
+                  <td>2.9%</td>
+                  <td>0.7%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -519,6 +615,11 @@
                   <td>化学制品</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.8%</td>
+                  <td>5.0%</td>
+                  <td>1.4%</td>
+                  <td>-1.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -539,6 +640,11 @@
                   <td>一般零售</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>3.4%</td>
+                  <td>6.2%</td>
+                  <td>3.6%</td>
+                  <td>3.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -559,6 +665,11 @@
                   <td>农化制品</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-5.2%</td>
+                  <td>5.0%</td>
+                  <td>0.9%</td>
+                  <td>-5.4%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -579,6 +690,11 @@
                   <td>电池</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.3%</td>
+                  <td>7.9%</td>
+                  <td>1.5%</td>
+                  <td>-0.5%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -599,6 +715,11 @@
                   <td>通用设备</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>7.5%</td>
+                  <td>10.0%</td>
+                  <td>3.5%</td>
+                  <td>7.3%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -619,6 +740,11 @@
                   <td>小家电</td>
                   <td><span class="tag mid">谨慎可打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.5%</td>
+                  <td>2.0%</td>
+                  <td>-2.5%</td>
+                  <td>1.3%</td>
                   <td>1.02亿</td>
                   <td>-1.93亿</td>
                   <td></td>
@@ -639,6 +765,11 @@
                   <td>通用设备</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.9%</td>
+                  <td>0.7%</td>
+                  <td>-1.8%</td>
+                  <td>-1.1%</td>
                   <td>0.41亿</td>
                   <td>0.00亿</td>
                   <td></td>
@@ -659,6 +790,11 @@
                   <td>旅游及景</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.0%</td>
+                  <td>1.9%</td>
+                  <td>0.5%</td>
+                  <td>-1.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -679,6 +815,11 @@
                   <td>家居用品</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.8%</td>
+                  <td>9.9%</td>
+                  <td>9.9%</td>
+                  <td>-2.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -699,6 +840,11 @@
                   <td>生物制品</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>5.5%</td>
+                  <td>10.0%</td>
+                  <td>7.4%</td>
+                  <td>5.3%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -719,6 +865,11 @@
                   <td>装修装饰</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>3.4%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>3.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -739,6 +890,11 @@
                   <td>包装印刷</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>2.2%</td>
+                  <td>3.0%</td>
+                  <td>-4.2%</td>
+                  <td>2.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -759,6 +915,11 @@
                   <td>小金属</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-3.6%</td>
+                  <td>-0.4%</td>
+                  <td>-3.0%</td>
+                  <td>-3.8%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -779,6 +940,11 @@
                   <td>种植业</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>3.8%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>3.6%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -799,6 +965,11 @@
                   <td>农化制品</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-3.9%</td>
+                  <td>5.7%</td>
+                  <td>2.2%</td>
+                  <td>-4.1%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -819,6 +990,11 @@
                   <td>一般零售</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.1%</td>
+                  <td>1.9%</td>
+                  <td>-0.6%</td>
+                  <td>-0.1%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -839,6 +1015,11 @@
                   <td>IT服务Ⅱ</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.8%</td>
+                  <td>1.6%</td>
+                  <td>-0.6%</td>
+                  <td>-2.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -859,6 +1040,11 @@
                   <td>燃气Ⅱ</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-2.4%</td>
+                  <td>-0.7%</td>
+                  <td>-1.9%</td>
+                  <td>-2.6%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -879,6 +1065,11 @@
                   <td>专用设备</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>2.9%</td>
+                  <td>8.4%</td>
+                  <td>1.8%</td>
+                  <td>2.7%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -899,6 +1090,11 @@
                   <td>化学制品</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>3.4%</td>
+                  <td>3.4%</td>
+                  <td>2.2%</td>
+                  <td>3.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -919,6 +1115,11 @@
                   <td>医疗服务</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>2.0%</td>
+                  <td>4.3%</td>
+                  <td>-0.2%</td>
+                  <td>1.8%</td>
                   <td>-0.46亿</td>
                   <td>-0.56亿</td>
                   <td></td>
@@ -939,6 +1140,11 @@
                   <td>自动化设</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.4%</td>
+                  <td>2.0%</td>
+                  <td>-2.2%</td>
+                  <td>1.2%</td>
                   <td>0.72亿</td>
                   <td>0.05亿</td>
                   <td>武汉紫阳东路:国泰海通证券股份有限公司武汉紫阳东路证券营业部</td>
@@ -959,6 +1165,11 @@
                   <td>汽车零部</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>5.9%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>5.7%</td>
                   <td>0.80亿</td>
                   <td>0.24亿</td>
                   <td></td>
@@ -979,6 +1190,11 @@
                   <td>地面兵装</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-3.6%</td>
+                  <td>-1.9%</td>
+                  <td>-9.0%</td>
+                  <td>-3.8%</td>
                   <td>0.30亿</td>
                   <td>0.12亿</td>
                   <td></td>
@@ -999,6 +1215,11 @@
                   <td>农化制品</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.2%</td>
+                  <td>1.3%</td>
+                  <td>-1.0%</td>
+                  <td>0.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1019,6 +1240,11 @@
                   <td>通信设备</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.5%</td>
+                  <td>3.0%</td>
+                  <td>-1.2%</td>
+                  <td>1.3%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1039,6 +1265,11 @@
                   <td>房地产服</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>0.0%</td>
+                  <td>3.3%</td>
+                  <td>0.4%</td>
+                  <td>-0.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1059,6 +1290,11 @@
                   <td>包装印刷</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.7%</td>
+                  <td>3.2%</td>
+                  <td>0.0%</td>
+                  <td>0.5%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1079,6 +1315,11 @@
                   <td>燃气Ⅱ</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.5%</td>
+                  <td>1.2%</td>
+                  <td>-1.9%</td>
+                  <td>0.3%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1099,6 +1340,11 @@
                   <td>特钢Ⅱ</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.3%</td>
+                  <td>1.3%</td>
+                  <td>-1.6%</td>
+                  <td>-0.5%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1119,6 +1365,11 @@
                   <td>农产品加</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.6%</td>
+                  <td>7.5%</td>
+                  <td>5.3%</td>
+                  <td>-1.8%</td>
                   <td>1.04亿</td>
                   <td>0.00亿</td>
                   <td>拉萨系:东方财富证券股份有限公司拉萨东环路第二证券营业部；拉萨系:东方财富证券股份有限公司拉萨金融城南环路证券营业部</td>
@@ -1139,6 +1390,11 @@
                   <td>通用设备</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.8%</td>
+                  <td>1.1%</td>
+                  <td>-0.6%</td>
+                  <td>-1.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1159,6 +1415,11 @@
                   <td>化学原料</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>5.1%</td>
+                  <td>8.3%</td>
+                  <td>0.3%</td>
+                  <td>4.9%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1179,6 +1440,11 @@
                   <td>专用设备</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>4.7%</td>
+                  <td>5.1%</td>
+                  <td>3.1%</td>
+                  <td>4.5%</td>
                   <td>3.69亿</td>
                   <td>1.37亿</td>
                   <td></td>
@@ -1199,6 +1465,11 @@
                   <td>电机Ⅱ</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.4%</td>
+                  <td>2.0%</td>
+                  <td>-2.5%</td>
+                  <td>-0.6%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1219,6 +1490,11 @@
                   <td>包装印刷</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>0.0%</td>
+                  <td>3.3%</td>
+                  <td>1.6%</td>
+                  <td>-0.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1239,6 +1515,11 @@
                   <td>基础建设</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>-1.5%</td>
+                  <td>9.8%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1259,6 +1540,11 @@
                   <td>工程咨询</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.2%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>0.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1279,6 +1565,11 @@
                   <td>家电零部</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>10.1%</td>
+                  <td>10.1%</td>
+                  <td>10.1%</td>
+                  <td>9.9%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1299,31 +1590,16 @@
                   <td>电网设备</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.6%</td>
+                  <td>-0.6%</td>
+                  <td>-2.3%</td>
+                  <td>-1.8%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
                   <td>1/3</td>
                   <td>收盘封住涨停；首次封板偏晚；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：电网设备；今日涨停家数尚可</td>
-                  <td>同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项</td>
-                </tr>
-                
-                <tr data-pool="涨停" data-quality="bad" data-risk="mid">
-                  <td>涨停</td>
-                  <td class="code">002713</td>
-                  <td>东易日盛</td>
-                  <td>1</td>
-                  <td>10.1%</td>
-                  <td>10:11:24</td>
-                  <td>1</td>
-                  <td>缺失</td>
-                  <td>装修装饰</td>
-                  <td><span class="tag bad">不能打板</span></td>
-                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
-                  <td>缺失</td>
-                  <td>缺失</td>
-                  <td></td>
-                  <td>1/3</td>
-                  <td>收盘封住涨停；首次封板偏晚；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：装修装饰；今日涨停家数尚可</td>
                   <td>同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项</td>
                 </tr>
                 
@@ -1339,6 +1615,11 @@
                   <td>消费电子</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>9.8%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1359,6 +1640,11 @@
                   <td>消费电子</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.8%</td>
+                  <td>8.3%</td>
+                  <td>6.5%</td>
+                  <td>1.6%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1379,6 +1665,11 @@
                   <td>医药商业</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.2%</td>
+                  <td>3.0%</td>
+                  <td>0.4%</td>
+                  <td>-0.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1399,6 +1690,11 @@
                   <td>专业工程</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.0%</td>
+                  <td>9.8%</td>
+                  <td>5.5%</td>
+                  <td>0.8%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1419,12 +1715,42 @@
                   <td>汽车零部</td>
                   <td><span class="tag bad">不能打板</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>1.2%</td>
+                  <td>6.0%</td>
+                  <td>4.6%</td>
+                  <td>1.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
                   <td>1/3</td>
                   <td>收盘封住涨停；首次封板偏晚；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数5次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：汽车零部；今日涨停家数尚可；股性历史开盘溢价较好：n=6 胜率83.3%</td>
                   <td>龙虎榜未上榜或未匹配；仅可作为盘后缺失项</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">002713</td>
+                  <td>东易日盛</td>
+                  <td>1</td>
+                  <td>10.1%</td>
+                  <td>10:11:24</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>装修装饰</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.4%</td>
+                  <td>4.2%</td>
+                  <td>-2.5%</td>
+                  <td>0.2%</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>0/3</td>
+                  <td>收盘封住涨停；首次封板偏晚；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；题材/行业热度一般：装修装饰；今日涨停家数尚可</td>
+                  <td>同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项</td>
                 </tr>
                 
                 <tr data-pool="炸板" data-quality="mid" data-risk="good">
@@ -1439,6 +1765,11 @@
                   <td>家居用品</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-3.5%</td>
+                  <td>0.4%</td>
+                  <td>-1.7%</td>
+                  <td>-3.7%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1459,6 +1790,11 @@
                   <td>化学制药</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.9%</td>
+                  <td>2.8%</td>
+                  <td>-3.7%</td>
+                  <td>-1.1%</td>
                   <td>0.56亿</td>
                   <td>-0.48亿</td>
                   <td></td>
@@ -1479,6 +1815,11 @@
                   <td>医疗服务</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>6.3%</td>
+                  <td>10.0%</td>
+                  <td>2.6%</td>
+                  <td>6.1%</td>
                   <td>-1.38亿</td>
                   <td>-0.13亿</td>
                   <td></td>
@@ -1499,6 +1840,11 @@
                   <td>种植业</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-2.0%</td>
+                  <td>1.4%</td>
+                  <td>-0.8%</td>
+                  <td>-2.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1519,6 +1865,11 @@
                   <td>饰品</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-5.8%</td>
+                  <td>3.0%</td>
+                  <td>0.2%</td>
+                  <td>-6.0%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1539,6 +1890,11 @@
                   <td>化学原料</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-4.3%</td>
+                  <td>-0.5%</td>
+                  <td>-1.9%</td>
+                  <td>-4.5%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1559,6 +1915,11 @@
                   <td>综合Ⅱ</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-4.0%</td>
+                  <td>4.3%</td>
+                  <td>0.9%</td>
+                  <td>-4.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1579,6 +1940,11 @@
                   <td>休闲食品</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.2%</td>
+                  <td>2.0%</td>
+                  <td>-0.4%</td>
+                  <td>-1.4%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1599,6 +1965,11 @@
                   <td>金属新材</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.0%</td>
+                  <td>-0.3%</td>
+                  <td>-2.9%</td>
+                  <td>-1.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1619,6 +1990,11 @@
                   <td>旅游及景</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.9%</td>
+                  <td>3.5%</td>
+                  <td>1.5%</td>
+                  <td>0.7%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1639,6 +2015,11 @@
                   <td>家电零部</td>
                   <td><span class="tag mid">炸板可接受/反包观察</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.0%</td>
+                  <td>10.0%</td>
+                  <td>10.0%</td>
+                  <td>-1.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1659,6 +2040,11 @@
                   <td>一般零售</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-2.1%</td>
+                  <td>0.7%</td>
+                  <td>-2.6%</td>
+                  <td>-2.3%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1679,6 +2065,11 @@
                   <td>房地产开</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>0.0%</td>
+                  <td>4.9%</td>
+                  <td>2.5%</td>
+                  <td>-0.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1699,6 +2090,11 @@
                   <td>电机Ⅱ</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-4.4%</td>
+                  <td>-3.0%</td>
+                  <td>-4.5%</td>
+                  <td>-4.6%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1719,6 +2115,11 @@
                   <td>装修建材</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-0.9%</td>
+                  <td>4.8%</td>
+                  <td>1.6%</td>
+                  <td>-1.1%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1739,6 +2140,11 @@
                   <td>元件</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.0%</td>
+                  <td>0.7%</td>
+                  <td>-1.5%</td>
+                  <td>-0.2%</td>
                   <td>0.56亿</td>
                   <td>-0.44亿</td>
                   <td></td>
@@ -1759,6 +2165,11 @@
                   <td>电子化学</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.9%</td>
+                  <td>0.7%</td>
+                  <td>-3.3%</td>
+                  <td>-2.1%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1779,6 +2190,11 @@
                   <td>化学制药</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-5.5%</td>
+                  <td>-4.4%</td>
+                  <td>-7.0%</td>
+                  <td>-5.7%</td>
                   <td>0.44亿</td>
                   <td>-0.01亿</td>
                   <td></td>
@@ -1799,6 +2215,11 @@
                   <td>纺织制造</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag good">实际有溢价</span></td>
+                  <td>0.8%</td>
+                  <td>6.1%</td>
+                  <td>3.0%</td>
+                  <td>0.6%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1819,6 +2240,11 @@
                   <td>食品加工</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.0%</td>
+                  <td>0.0%</td>
+                  <td>-6.6%</td>
+                  <td>-1.2%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1839,6 +2265,11 @@
                   <td>电网设备</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-1.2%</td>
+                  <td>1.5%</td>
+                  <td>-1.2%</td>
+                  <td>-1.4%</td>
                   <td>缺失</td>
                   <td>缺失</td>
                   <td></td>
@@ -1859,6 +2290,11 @@
                   <td>软件开发</td>
                   <td><span class="tag bad">炸板失败/不能打</span></td>
                   <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag bad">实际无溢价</span></td>
+                  <td>-5.4%</td>
+                  <td>-4.2%</td>
+                  <td>-6.7%</td>
+                  <td>-5.6%</td>
                   <td>0.43亿</td>
                   <td>-0.06亿</td>
                   <td></td>

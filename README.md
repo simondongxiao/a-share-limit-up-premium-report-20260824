@@ -7,4 +7,4 @@ Stable GitHub Pages homepage:
 - `daily/YYYY-MM-DD.html`: daily decision detail reports
 - `daily/YYYY-MM-DD.csv/json`: auditable detail files
 
-Latest daily report: 2026-08-31
+Latest daily report: 2026-09-01

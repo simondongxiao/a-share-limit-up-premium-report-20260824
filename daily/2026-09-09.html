@@ -1,0 +1,2344 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-09-09 涨停/炸板打板决策</title>
+  <style>
+    :root {
+      --bg:#070b14; --panel:#0e1526; --panel2:#111a30; --line:#1c2942;
+      --txt:#dbe4f3; --sub:#8296b8; --dim:#5a6d8f;
+      --red:#f5484d; --gold:#f0b429; --cyan:#38bdf8; --green:#34d399; --purple:#a78bfa;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--txt); font:14px/1.55 "Microsoft YaHei", Arial, sans-serif; }
+    .page { width:min(1480px, calc(100vw - 28px)); margin:0 auto; padding:24px 0 42px; }
+    .hero { border:1px solid var(--line); border-radius:8px; padding:24px; background:linear-gradient(135deg, rgba(245,72,77,.18), rgba(56,189,248,.08) 52%, rgba(17,26,48,.95)); }
+    h1 { margin:0; font-size:32px; letter-spacing:0; }
+    .lead { color:#b9c6dc; max-width:980px; margin:12px 0 0; font-size:15px; }
+    .meta { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+    .meta span { border:1px solid var(--line); background:#0b1222; border-radius:6px; padding:7px 9px; color:#c7d4ea; }
+    .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:16px; }
+    .metric { border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:14px; min-height:96px; border-top:3px solid var(--cyan); }
+    .metric.good { border-top-color:var(--green); } .metric.mid { border-top-color:var(--gold); } .metric.bad { border-top-color:var(--red); } .metric.purple { border-top-color:var(--purple); }
+    .metric b { display:block; font-size:26px; } .metric span { display:block; color:var(--sub); } .metric em { display:block; color:var(--dim); font-style:normal; font-size:12px; margin-top:4px; }
+    .panel { margin-top:16px; border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:16px; }
+    h2 { margin:0 0 10px; font-size:20px; }
+    .rules { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .rule { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .rule h3 { margin:0 0 8px; font-size:16px; } .rule p { margin:8px 0 0; color:#c2cee2; }
+    .score-notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .score-note { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .score-note h3 { margin:0 0 8px; font-size:16px; } .score-note p { margin:0; color:#c2cee2; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    input, button { border:1px solid #263651; border-radius:6px; background:#0b1222; color:var(--txt); padding:8px 10px; }
+    input { min-width:280px; flex:1; }
+    button { cursor:pointer; }
+    button.active { border-color:var(--gold); }
+    .table-wrap { max-height:760px; overflow:auto; border:1px solid var(--line); border-radius:8px; }
+    table { width:100%; border-collapse:collapse; min-width:1980px; font-size:12px; }
+    th,td { padding:8px 9px; border-bottom:1px solid #17233a; text-align:left; vertical-align:top; }
+    th { position:sticky; top:0; background:#10182b; z-index:1; color:#9fb2d2; white-space:nowrap; }
+    .code { font-family:Consolas, monospace; color:#b7d5ff; }
+    .tag { display:inline-block; border-radius:999px; padding:3px 8px; white-space:nowrap; }
+    .tag.good { color:#91f2c7; background:rgba(52,211,153,.13); border:1px solid rgba(52,211,153,.35); }
+    .tag.mid { color:#ffd67a; background:rgba(240,180,41,.12); border:1px solid rgba(240,180,41,.35); }
+    .tag.bad { color:#ff9ca0; background:rgba(245,72,77,.13); border:1px solid rgba(245,72,77,.35); }
+    .footer { color:var(--dim); font-size:12px; text-align:center; margin-top:18px; }
+    @media (max-width:960px) { .metrics,.rules,.score-notes { grid-template-columns:1fr; } h1 { font-size:26px; } }
+  </style>
+</head>
+<body>
+<main class="page">
+  <section class="hero">
+    <h1>2026-09-09 涨停/炸板打板决策</h1>
+    <p class="lead">本页回答两个不同问题：今天盘中打板/炸板动作是否合理，以及盘后看明天是否可能没有溢价。龙虎榜只作为盘后次日风险特征，不倒推盘中打板信号。</p>
+    <div class="meta">
+      <span>生成时间：2026-09-09 17:51:22</span>
+      <span>明细CSV：同目录 CSV 文件，首页提供下载入口</span>
+      <span>题材热度：通信设备:6；电网设备:6；农产品加:4；元件:4；农化制品:3；一般零售:3；种植业:3；化学制品:3</span>
+    </div>
+    <div class="metrics">
+      <div class='metric bad'><b>指数下跌</b><span>指数环境</span><em>上涨比例 34.8%，MA5上方 49.9%</em></div>
+      <div class='metric bad'><b>情绪退潮</b><span>情绪阶段</span><em>分数 -2，晋级率 20.5%</em></div>
+      <div class='metric good'><b>48</b><span>涨停池</span><em>最高板 5，未炸板/少炸更优</em></div>
+      <div class='metric mid'><b>27</b><span>炸板池</span><em>炸板率 36.0%</em></div>
+      <div class='metric bad'><b>7</b><span>跌停池</span><em>情绪尾部风险</em></div>
+      <div class='metric purple'><b>53</b><span>可以/谨慎</span><em>严格可打 18</em></div>
+      <div class='metric bad'><b>42</b><span>高无溢价风险</span><em>次日集合竞价重点回避</em></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>决策边界</h2>
+    <div class="rules">
+      <div class="rule"><h3>先定大环境</h3><p>先看指数上涨/震荡/下跌，再看情绪上升/混沌/退潮。上升期提高进攻容错，退潮期只做前排或强辨识度。</p></div>
+      <div class="rule"><h3>再定板块</h3><p>优先日内发酵板块和板块内前三封板；若前一交易日本板块已给溢价，今日前三名以后按后排延续处理，不追。</p></div>
+      <div class="rule"><h3>最后定个股</h3><p>读取三年股性结构：涨停次数、未封住比例、次日开盘/最高/收盘溢价。早封或尾封都不能单独决定能不能打。</p></div>
+      <div class="rule"><h3>可以打板</h3><p>市场/情绪、板块日内发酵、个股股性和量价结构同时站得住，且次日无溢价风险不高。</p></div>
+      <div class="rule"><h3>炸板不等于错</h3><p>早盘前排炸板、市场整体情绪转弱或行业前排承压时，可记为“可打但炸板/反包观察”，等待次日承接验证。</p></div>
+      <div class="rule"><h3>涨停也可能不能打</h3><p>高潮兑现、后排延续、反复炸板、成交过热、股性差或盘后龙虎榜卖压重，即使封住也可能是卖点。</p></div>
+    </div>
+  </section>
+
+  
+    <section class="panel">
+      <h2>评分规则/备注</h2>
+      <div class="score-notes">
+        <div class="score-note">
+          <h3>市场和情绪</h3>
+          <p>先用全市场日内涨跌、MA5/MA10参与度判断指数上涨/震荡/下跌，再用炸板率、涨停家数变化、连板晋级率、跌停家数合成情绪上升/混沌/退潮。上升期加进攻分，退潮期提高风险。</p>
+        </div>
+        <div class="score-note">
+          <h3>封板和板位</h3>
+          <p>封板时间只是特征，不单独决定能不能打。09:30前封板加2分且降风险；09:30-10:30加1分；10:30后不直接扣动作分，但必须由板块发酵、股性或大环境确认。3板以上加3分，2板加2分。</p>
+        </div>
+        <div class="score-note">
+          <h3>炸板处理</h3>
+          <p>未炸板加2分；炸板3-5次扣1分并加风险；5次以上扣2分并加风险。炸板后收盘距离涨停价>-3%仍可观察反包，跌离超过6%按失败属性加重。</p>
+        </div>
+        <div class="score-note">
+          <h3>板块和股性</h3>
+          <p>优先日内发酵板块和板块内前三封板。若前一交易日本板块涨停在今日开盘已有溢价，而今日该股排在板块前三名以后，按后排延续硬排除。股性读取近1年/3年涨停次数、炸板率、次日开盘/最高/收盘溢价和炸板A杀率；历史炸板A杀率超过30%时，强制降为谨慎可打或禁止打板。</p>
+        </div>
+        <div class="score-note">
+          <h3>龙虎榜</h3>
+          <p>龙虎榜是收盘后特征，不倒推为盘中打板理由。盘后净买入、机构净买入、关注席位上榜可降低次日风险；净卖出或卖方集中度明显更高会提高次日无溢价风险。</p>
+        </div>
+        <div class="score-note">
+          <h3>结论边界</h3>
+          <p>“可以打板/谨慎可打/不能打板”是当日信号判断；T+1开盘、最高、收盘只用于之后验证实际溢价，未收盘前保持待验证，不猜最终标签。</p>
+        </div>
+      </div>
+    </section>
+    
+
+  <section class="panel">
+    <h2>逐股判断</h2>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索代码、名称、行业、原因、席位...">
+      <button data-filter="all" class="active">全部</button>
+      <button data-pool="涨停">涨停</button>
+      <button data-pool="炸板">炸板</button>
+      <button data-quality="good">可以</button>
+      <button data-quality="mid">谨慎/观察</button>
+      <button data-quality="bad">不能</button>
+      <button data-risk="bad">高风险</button>
+    </div>
+    <div class="table-wrap">
+      <table id="stocks">
+        <thead><tr>
+          <th>池</th><th>代码</th><th>名称</th><th>板位</th><th>涨跌幅</th><th>首次封板</th><th>炸板</th><th>距涨停</th><th>行业</th><th>板块排序</th><th>三年股性</th><th>炸板A杀率</th>
+          <th>动作结论</th><th>次日风险</th><th>实际标签</th><th>T+1开盘</th><th>T+1最高</th><th>T+1收盘</th><th>扣费后开盘</th>
+          <th>LHB净买</th><th>机构净买</th><th>关注席位</th><th>分数(动作/盘中风险/盘后风险)</th><th>盘中原因</th><th>盘后风险备注</th><th>数据缺口</th>
+        </tr></thead>
+        <tbody>
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">002470</td>
+                  <td>金正大</td>
+                  <td>3</td>
+                  <td>9.9%</td>
+                  <td>09:25:00</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>农化制品</td>
+                  <td>2/3</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>13/-1/-1</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；3板以上有辨识度；未炸板；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：农化制品；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">000930</td>
+                  <td>中粮科技</td>
+                  <td>2</td>
+                  <td>9.9%</td>
+                  <td>09:32:12</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>农产品加</td>
+                  <td>1/4</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>1.40亿</td>
+                  <td>-0.09亿</td>
+                  <td></td>
+                  <td>12/0/0</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；未炸板；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：农产品加；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入1.40亿，可改善次日风险；机构净卖出0.09亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">603042</td>
+                  <td>华脉科技</td>
+                  <td>3</td>
+                  <td>10.0%</td>
+                  <td>09:25:02</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>通信设备</td>
+                  <td>1/6</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>11/0/0</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；3板以上有辨识度；未炸板；成交额过低，容量和滑点风险高；所属行业在今日涨停/炸板热度前排：通信设备；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">002349</td>
+                  <td>精华制药</td>
+                  <td>2</td>
+                  <td>10.0%</td>
+                  <td>09:50:27</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>中药Ⅱ</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>2.27亿</td>
+                  <td>-0.01亿</td>
+                  <td></td>
+                  <td>11/1/1</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；未炸板；换手处于可承接区间；题材/行业热度一般：中药Ⅱ；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入2.27亿，可改善次日风险；机构净卖出0.01亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">002790</td>
+                  <td>瑞尔特</td>
+                  <td>2</td>
+                  <td>10.0%</td>
+                  <td>09:25:00</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>家居用品</td>
+                  <td>2/2</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-0.12亿</td>
+                  <td>-0.25亿</td>
+                  <td></td>
+                  <td>11/1/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；未炸板；换手处于可承接区间；题材/行业热度一般：家居用品；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净卖出0.12亿，次日风险上升；机构净卖出0.25亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">000523</td>
+                  <td>红棉股份</td>
+                  <td>2</td>
+                  <td>10.1%</td>
+                  <td>09:25:00</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>综合Ⅱ</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-1.71亿</td>
+                  <td>0.00亿</td>
+                  <td>松江中山东路:国泰海通证券股份有限公司上海松江区中山东路证券营业部</td>
+                  <td>10/1/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；未炸板；题材/行业热度一般：综合Ⅱ；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净卖出1.71亿，次日风险上升；关注席位上榜：松江中山东路:国泰海通证券股份有限公司上海松江区中山东路证券营业部；卖方集中度明显高于买方</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">000978</td>
+                  <td>桂林旅游</td>
+                  <td>3</td>
+                  <td>10.0%</td>
+                  <td>13:06:24</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>旅游及景</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.11亿</td>
+                  <td>0.16亿</td>
+                  <td></td>
+                  <td>10/2/0</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；3板以上有辨识度；未炸板；换手过高，次日抛压风险上升；题材/行业热度一般：旅游及景；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.11亿，可改善次日风险；机构净买入0.16亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">600865</td>
+                  <td>百大集团</td>
+                  <td>5</td>
+                  <td>10.0%</td>
+                  <td>09:32:21</td>
+                  <td>2</td>
+                  <td>缺失</td>
+                  <td>一般零售</td>
+                  <td>1/3</td>
+                  <td>股性偏强</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>10/2/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；3板以上有辨识度；炸板次数2次，可接受但需看承接；题材/行业热度一般：一般零售；板块内封板排序第1，属于日内前排；图形新高或强势池新高；5日涨幅过高，次日兑现风险；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本4，次日开盘有溢价率66.7%，均值5.8%；历史封板稳定性一般：涨停/炸板样本中未封住比例50.0%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">600792</td>
+                  <td>云煤能源</td>
+                  <td>2</td>
+                  <td>10.1%</td>
+                  <td>10:50:26</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>焦炭Ⅱ</td>
+                  <td>1/1</td>
+                  <td>A杀血统高</td>
+                  <td>1/100.0%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-0.44亿</td>
+                  <td>-0.39亿</td>
+                  <td></td>
+                  <td>10/5/7</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；2板承接优于普通首板；未炸板；换手处于可承接区间；题材/行业热度一般：焦炭Ⅱ；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；A杀血统指数偏高：历史炸板样本1，炸板后A杀率100.0%；A杀血统样本较少，强制退出严格可以打板名单</td>
+                  <td>盘后龙虎榜净卖出0.44亿，次日风险上升；机构净卖出0.39亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">000912</td>
+                  <td>泸天化</td>
+                  <td>2</td>
+                  <td>9.9%</td>
+                  <td>09:25:00</td>
+                  <td>4</td>
+                  <td>缺失</td>
+                  <td>农化制品</td>
+                  <td>1/3</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.02亿</td>
+                  <td>0.00亿</td>
+                  <td></td>
+                  <td>9/2/1</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；炸板次数4次，封板稳定性一般；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：农化制品；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.02亿，可改善次日风险</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">002068</td>
+                  <td>黑猫股份</td>
+                  <td>2</td>
+                  <td>10.0%</td>
+                  <td>13:10:42</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>橡胶</td>
+                  <td>2/2</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.60亿</td>
+                  <td>-0.39亿</td>
+                  <td>拉萨系:东方财富证券股份有限公司拉萨金融城南环路证券营业部</td>
+                  <td>9/2/1</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；2板承接优于普通首板；未炸板；换手处于可承接区间；题材/行业热度一般：橡胶；板块内封板排序第2，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.60亿，可改善次日风险；机构净卖出0.39亿；关注席位上榜：拉萨系:东方财富证券股份有限公司拉萨金融城南环路证券营业部</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">600698</td>
+                  <td>湖南天雁</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:46:06</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>汽车零部</td>
+                  <td>2/2</td>
+                  <td>股性偏强</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>9/2/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；题材/行业热度一般：汽车零部；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本5，次日开盘有溢价率60.0%，均值-0.1%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">000759</td>
+                  <td>中百集团</td>
+                  <td>3</td>
+                  <td>10.0%</td>
+                  <td>09:33:30</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>一般零售</td>
+                  <td>2/3</td>
+                  <td>样本不足</td>
+                  <td>3/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-0.25亿</td>
+                  <td>0.12亿</td>
+                  <td></td>
+                  <td>9/3/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；3板以上有辨识度；炸板次数1次，可接受但需看承接；换手过高，次日抛压风险上升；题材/行业热度一般：一般零售；板块内封板排序第2，属于日内前排；图形新高或强势池新高；5日涨幅过高，次日兑现风险；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净卖出0.25亿，次日风险上升；机构净买入0.12亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002295</td>
+                  <td>精艺股份</td>
+                  <td>2</td>
+                  <td>10.0%</td>
+                  <td>09:25:00</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>工业金属</td>
+                  <td>1/1</td>
+                  <td>A杀血统高</td>
+                  <td>3/33.3%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.55亿</td>
+                  <td>-0.11亿</td>
+                  <td></td>
+                  <td>9/5/5</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；未炸板；成交额过低，容量和滑点风险高；题材/行业热度一般：工业金属；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；A杀血统指数偏高：历史炸板样本3，炸板后A杀率33.3%；历史炸板A杀率&gt;30%，按股性记忆强制禁止打板</td>
+                  <td>盘后龙虎榜净买入0.55亿，可改善次日风险；机构净卖出0.11亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">603162</td>
+                  <td>海通发展</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:58:18</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>航运港口</td>
+                  <td>1/3</td>
+                  <td>A杀血统高</td>
+                  <td>3/33.3%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>9/5/5</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；题材/行业热度一般：航运港口；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本3，次日开盘有溢价率100.0%，均值1.8%；历史封板稳定性一般：涨停/炸板样本中未封住比例100.0%；A杀血统指数偏高：历史炸板样本3，炸板后A杀率33.3%；历史炸板A杀率&gt;30%，按股性记忆强制禁止打板</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">000972</td>
+                  <td>中基健康</td>
+                  <td>1</td>
+                  <td>10.1%</td>
+                  <td>09:34:15</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>农产品加</td>
+                  <td>2/4</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>8/2/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：农产品加；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">000980</td>
+                  <td>众泰汽车</td>
+                  <td>2</td>
+                  <td>9.8%</td>
+                  <td>09:30:33</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>汽车零部</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.89亿</td>
+                  <td>-0.11亿</td>
+                  <td></td>
+                  <td>8/2/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：汽车零部；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.89亿，可改善次日风险；机构净卖出0.11亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">600778</td>
+                  <td>友好集团</td>
+                  <td>1</td>
+                  <td>9.9%</td>
+                  <td>10:05:08</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>一般零售</td>
+                  <td>3/3</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>8/3/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；题材/行业热度一般：一般零售；板块内封板排序第3，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">603186</td>
+                  <td>华正新材</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:03:23</td>
+                  <td>2</td>
+                  <td>缺失</td>
+                  <td>元件</td>
+                  <td>1/4</td>
+                  <td>股性偏强</td>
+                  <td>3/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>4.89亿</td>
+                  <td>0.00亿</td>
+                  <td>武汉紫阳东路:国泰海通证券股份有限公司武汉紫阳东路证券营业部</td>
+                  <td>8/3/1</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；成交额较大，具备市场辨识度；所属行业在今日涨停/炸板热度前排：元件；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本4，次日开盘有溢价率100.0%，均值2.7%；历史封板稳定性一般：涨停/炸板样本中未封住比例75.0%</td>
+                  <td>盘后龙虎榜净买入4.89亿，可改善次日风险；关注席位上榜：武汉紫阳东路:国泰海通证券股份有限公司武汉紫阳东路证券营业部</td>
+                  <td>前一交易日本行业涨停样本缺失；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="good">
+                  <td>涨停</td>
+                  <td class="code">603900</td>
+                  <td>莱绅通灵</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>13:52:13</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>饰品</td>
+                  <td>1/1</td>
+                  <td>股性偏强</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.31亿</td>
+                  <td>0.16亿</td>
+                  <td></td>
+                  <td>8/3/1</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；题材/行业热度一般：饰品；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本3，次日开盘有溢价率66.7%，均值0.5%；历史封板稳定性一般：涨停/炸板样本中未封住比例66.7%</td>
+                  <td>盘后龙虎榜净买入0.31亿，可改善次日风险；机构净买入0.16亿</td>
+                  <td>前一交易日本行业涨停样本缺失；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="good" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">605077</td>
+                  <td>华康股份</td>
+                  <td>2</td>
+                  <td>10.0%</td>
+                  <td>09:34:02</td>
+                  <td>4</td>
+                  <td>缺失</td>
+                  <td>化学制品</td>
+                  <td>1/3</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag good">可以打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-0.27亿</td>
+                  <td>0.00亿</td>
+                  <td></td>
+                  <td>8/3/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；炸板次数4次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：化学制品；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净卖出0.27亿，次日风险上升</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">600121</td>
+                  <td>郑州煤电</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:55:46</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>煤炭开采</td>
+                  <td>2/2</td>
+                  <td>A杀血统高</td>
+                  <td>3/33.3%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>8/7/7</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；题材/行业热度一般：煤炭开采；板块内封板排序第2，属于日内前排；接近年/三年高点，图形有辨识度；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性中性：涨停样本4，次日开盘有溢价率50.0%；历史封板稳定性一般：涨停/炸板样本中未封住比例75.0%；A杀血统指数偏高：历史炸板样本3，炸板后A杀率33.3%；历史炸板A杀率&gt;30%，按股性记忆强制禁止打板</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">603421</td>
+                  <td>鼎信通讯</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:30:33</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>通信设备</td>
+                  <td>2/6</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">谨慎可打</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>7/2/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：通信设备；板块内封板排序第2，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">000993</td>
+                  <td>闽东电力</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:54:39</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>电力</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">谨慎可打</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>7/3/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；题材/行业热度一般：电力；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">600359</td>
+                  <td>新农开发</td>
+                  <td>1</td>
+                  <td>10.1%</td>
+                  <td>09:33:21</td>
+                  <td>2</td>
+                  <td>缺失</td>
+                  <td>种植业</td>
+                  <td>2/3</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">谨慎可打</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.25亿</td>
+                  <td>0.00亿</td>
+                  <td></td>
+                  <td>7/3/2</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：种植业；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.25亿，可改善次日风险</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002498</td>
+                  <td>汉缆股份</td>
+                  <td>1</td>
+                  <td>9.9%</td>
+                  <td>09:59:33</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>电网设备</td>
+                  <td>3/6</td>
+                  <td>股性偏弱</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>7/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：电网设备；板块内封板排序第3，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏弱：涨停样本3，次日开盘有溢价率33.3%，均值2.1%；历史封板稳定性一般：涨停/炸板样本中未封住比例66.7%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">600869</td>
+                  <td>远东股份</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>14:27:21</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>电网设备</td>
+                  <td>6/6</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>7/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；成交额较大，具备市场辨识度；所属行业在今日涨停/炸板热度前排：电网设备；板块内封板排序第6，不是日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">600255</td>
+                  <td>鑫科材料</td>
+                  <td>1</td>
+                  <td>9.9%</td>
+                  <td>09:46:55</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>金属新材</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">谨慎可打</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/3/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：金属新材；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">600403</td>
+                  <td>大有能源</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:57:05</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>煤炭开采</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">谨慎可打</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/3/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：煤炭开采；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">000565</td>
+                  <td>渝三峡Ａ</td>
+                  <td>1</td>
+                  <td>9.9%</td>
+                  <td>10:42:51</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>化学制品</td>
+                  <td>3/3</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：化学制品；板块内封板排序第3，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002040</td>
+                  <td>南 京 港</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:11:51</td>
+                  <td>2</td>
+                  <td>缺失</td>
+                  <td>航运港口</td>
+                  <td>2/3</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：航运港口；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">601579</td>
+                  <td>会稽山</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:51:10</td>
+                  <td>4</td>
+                  <td>缺失</td>
+                  <td>非白酒</td>
+                  <td>2/2</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数4次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：非白酒；板块内封板排序第2，属于日内前排；接近年/三年高点，图形有辨识度；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">603328</td>
+                  <td>依顿电子</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>13:05:51</td>
+                  <td>0</td>
+                  <td>缺失</td>
+                  <td>元件</td>
+                  <td>4/4</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；未炸板；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：元件；板块内封板排序第4，不是日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">603650</td>
+                  <td>彤程新材</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:41:29</td>
+                  <td>3</td>
+                  <td>缺失</td>
+                  <td>橡胶</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数3次，封板稳定性一般；换手处于可承接区间；成交额较大，具备市场辨识度；题材/行业热度一般：橡胶；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">605198</td>
+                  <td>安德利</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:35:02</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>农产品加</td>
+                  <td>3/4</td>
+                  <td>股性偏弱</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；所属行业在今日涨停/炸板热度前排：农产品加；板块内封板排序第3，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏弱：涨停样本3，次日开盘有溢价率33.3%，均值-0.9%；历史封板稳定性一般：涨停/炸板样本中未封住比例66.7%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">600540</td>
+                  <td>新赛股份</td>
+                  <td>1</td>
+                  <td>10.1%</td>
+                  <td>10:06:21</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>种植业</td>
+                  <td>3/3</td>
+                  <td>A杀血统高</td>
+                  <td>3/33.3%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.39亿</td>
+                  <td>0.00亿</td>
+                  <td></td>
+                  <td>6/7/6</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手过高，次日抛压风险上升；题材/行业热度一般：种植业；板块内封板排序第3，属于日内前排；接近年/三年高点，图形有辨识度；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本7，次日开盘有溢价率85.7%，均值5.2%；A杀血统指数偏高：历史炸板样本3，炸板后A杀率33.3%；历史炸板A杀率&gt;30%，按股性记忆强制禁止打板</td>
+                  <td>盘后龙虎榜净买入0.39亿，可改善次日风险</td>
+                  <td>前一交易日本行业涨停样本缺失；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">605162</td>
+                  <td>新中港</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>11:04:32</td>
+                  <td>5</td>
+                  <td>缺失</td>
+                  <td>电力</td>
+                  <td>2/2</td>
+                  <td>A杀血统高</td>
+                  <td>2/50.0%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/8/8</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数5次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：电力；板块内封板排序第2，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本4，次日开盘有溢价率75.0%，均值0.9%；历史封板稳定性一般：涨停/炸板样本中未封住比例50.0%；A杀血统指数偏高：历史炸板样本2，炸板后A杀率50.0%；A杀血统样本较少，强制退出严格可以打板名单</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002046</td>
+                  <td>国机精工</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:08:09</td>
+                  <td>2</td>
+                  <td>缺失</td>
+                  <td>通用设备</td>
+                  <td>2/2</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.11亿</td>
+                  <td>-0.23亿</td>
+                  <td></td>
+                  <td>5/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：通用设备；板块内封板排序第2，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.11亿，可改善次日风险；机构净卖出0.23亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="mid" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">603308</td>
+                  <td>应流股份</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:01:45</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>通用设备</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">谨慎可打（次日风险高）</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>5/4/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：通用设备；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002162</td>
+                  <td>悦心健康</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:25:00</td>
+                  <td>8</td>
+                  <td>缺失</td>
+                  <td>家居用品</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>5/5/5</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数8次，封板分歧大；换手处于可承接区间；题材/行业热度一般：家居用品；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="mid">
+                  <td>涨停</td>
+                  <td class="code">601890</td>
+                  <td>亚星锚链</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:15:26</td>
+                  <td>3</td>
+                  <td>缺失</td>
+                  <td>航海装备</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>2.12亿</td>
+                  <td>0.00亿</td>
+                  <td>松江中山东路:国泰海通证券股份有限公司上海松江区中山东路证券营业部</td>
+                  <td>5/5/3</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数3次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：航海装备；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入2.12亿，可改善次日风险；关注席位上榜：松江中山东路:国泰海通证券股份有限公司上海松江区中山东路证券营业部</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002077</td>
+                  <td>大港股份</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>09:32:06</td>
+                  <td>10</td>
+                  <td>缺失</td>
+                  <td>半导体</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/5/5</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数10次，封板分歧大；换手处于可承接区间；题材/行业热度一般：半导体；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">600192</td>
+                  <td>长城电工</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:32:39</td>
+                  <td>1</td>
+                  <td>缺失</td>
+                  <td>电网设备</td>
+                  <td>5/6</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/5/5</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：电网设备；板块内封板排序第5，不是日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002155</td>
+                  <td>湖南黄金</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>13:53:54</td>
+                  <td>27</td>
+                  <td>缺失</td>
+                  <td>贵金属</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>4.39亿</td>
+                  <td>2.01亿</td>
+                  <td></td>
+                  <td>4/6/4</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数27次，封板分歧大；换手处于可承接区间；成交额较大，具备市场辨识度；题材/行业热度一般：贵金属；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入4.39亿，可改善次日风险；机构净买入2.01亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">601872</td>
+                  <td>招商轮船</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:55:20</td>
+                  <td>8</td>
+                  <td>缺失</td>
+                  <td>航运港口</td>
+                  <td>3/3</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/6/6</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数8次，封板分歧大；成交额较大，具备市场辨识度；题材/行业热度一般：航运港口；板块内封板排序第3，属于日内前排；接近年/三年高点，图形有辨识度；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">000798</td>
+                  <td>中水渔业</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:24:30</td>
+                  <td>13</td>
+                  <td>缺失</td>
+                  <td>渔业</td>
+                  <td>1/1</td>
+                  <td>股性偏强</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.54亿</td>
+                  <td>-0.13亿</td>
+                  <td></td>
+                  <td>4/7/7</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数13次，封板分歧大；换手过高，次日抛压风险上升；题材/行业热度一般：渔业；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本4，次日开盘有溢价率66.7%，均值3.0%；历史封板稳定性一般：涨停/炸板样本中未封住比例50.0%</td>
+                  <td>盘后龙虎榜净买入0.54亿，可改善次日风险；机构净卖出0.13亿</td>
+                  <td>前一交易日本行业涨停样本缺失；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">000019</td>
+                  <td>深粮控股</td>
+                  <td>1</td>
+                  <td>10.0%</td>
+                  <td>10:05:33</td>
+                  <td>3</td>
+                  <td>缺失</td>
+                  <td>农产品加</td>
+                  <td>4/4</td>
+                  <td>A杀血统高</td>
+                  <td>1/100.0%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/9/9</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数3次，封板稳定性一般；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：农产品加；板块内封板排序第4，不是日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；A杀血统指数偏高：历史炸板样本1，炸板后A杀率100.0%；A杀血统样本较少，强制退出严格可以打板名单</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="涨停" data-quality="bad" data-risk="bad">
+                  <td>涨停</td>
+                  <td class="code">002377</td>
+                  <td>国创高新</td>
+                  <td>1</td>
+                  <td>10.1%</td>
+                  <td>10:34:18</td>
+                  <td>6</td>
+                  <td>缺失</td>
+                  <td>炼化及贸</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>3/6/6</td>
+                  <td>收盘封住涨停；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数6次，封板分歧大；题材/行业热度一般：炼化及贸；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">600108</td>
+                  <td>亚盛集团</td>
+                  <td>5</td>
+                  <td>8.1%</td>
+                  <td>09:31:46</td>
+                  <td>3</td>
+                  <td>-1.7%</td>
+                  <td>种植业</td>
+                  <td>1/3</td>
+                  <td>股性偏强</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-0.72亿</td>
+                  <td>0.38亿</td>
+                  <td>成都北一环:国泰海通证券股份有限公司成都北一环路证券营业部</td>
+                  <td>10/3/2</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；3板以上有辨识度；炸板次数3次，封板稳定性一般；换手过高，次日抛压风险上升；成交额较大，具备市场辨识度；题材/行业热度一般：种植业；板块内封板排序第1，属于日内前排；图形新高或强势池新高；5日涨幅过高，次日兑现风险；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本5，次日开盘有溢价率75.0%，均值5.2%</td>
+                  <td>盘后龙虎榜净卖出0.72亿，次日风险上升；机构净买入0.38亿；关注席位上榜：成都北一环:国泰海通证券股份有限公司成都北一环路证券营业部</td>
+                  <td>前一交易日本行业涨停样本缺失；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="good">
+                  <td>炸板</td>
+                  <td class="code">600691</td>
+                  <td>潞化科技</td>
+                  <td>2</td>
+                  <td>6.0%</td>
+                  <td>09:31:53</td>
+                  <td>1</td>
+                  <td>-3.8%</td>
+                  <td>农化制品</td>
+                  <td>3/3</td>
+                  <td>样本不足</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>9/1/1</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：农化制品；板块内封板排序第3，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="good">
+                  <td>炸板</td>
+                  <td class="code">000020</td>
+                  <td>深华发Ａ</td>
+                  <td>2</td>
+                  <td>8.8%</td>
+                  <td>09:31:00</td>
+                  <td>1</td>
+                  <td>-1.1%</td>
+                  <td>光学光电</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag good">低/可控</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>0.11亿</td>
+                  <td>0.08亿</td>
+                  <td></td>
+                  <td>9/2/0</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：光学光电；板块内封板排序第1，属于日内前排；图形新高或强势池新高；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td>盘后龙虎榜净买入0.11亿，可改善次日风险；机构净买入0.08亿</td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">603938</td>
+                  <td>三孚股份</td>
+                  <td>2</td>
+                  <td>6.0%</td>
+                  <td>09:37:57</td>
+                  <td>2</td>
+                  <td>-3.6%</td>
+                  <td>化学原料</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>8/2/2</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；2板承接优于普通首板；炸板次数2次，可接受但需看承接；换手处于可承接区间；成交额较大，具备市场辨识度；题材/行业热度一般：化学原料；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">600059</td>
+                  <td>古越龙山</td>
+                  <td>0</td>
+                  <td>6.8%</td>
+                  <td>09:49:43</td>
+                  <td>2</td>
+                  <td>-2.9%</td>
+                  <td>非白酒</td>
+                  <td>1/2</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>7/3/3</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：非白酒；板块内封板排序第1，属于日内前排；图形新高或强势池新高；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">000586</td>
+                  <td>汇源通信</td>
+                  <td>0</td>
+                  <td>6.7%</td>
+                  <td>09:36:57</td>
+                  <td>1</td>
+                  <td>-3.0%</td>
+                  <td>通信设备</td>
+                  <td>3/6</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/2/2</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：通信设备；板块内封板排序第3，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">002121</td>
+                  <td>科陆电子</td>
+                  <td>0</td>
+                  <td>5.8%</td>
+                  <td>09:48:09</td>
+                  <td>1</td>
+                  <td>-3.8%</td>
+                  <td>电网设备</td>
+                  <td>2/6</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/2/2</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：电网设备；板块内封板排序第2，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">002953</td>
+                  <td>日丰股份</td>
+                  <td>0</td>
+                  <td>6.0%</td>
+                  <td>09:39:48</td>
+                  <td>1</td>
+                  <td>-3.6%</td>
+                  <td>电网设备</td>
+                  <td>1/6</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/2/2</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：电网设备；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">600234</td>
+                  <td>科新发展</td>
+                  <td>0</td>
+                  <td>6.9%</td>
+                  <td>09:38:10</td>
+                  <td>5</td>
+                  <td>-2.8%</td>
+                  <td>装修装饰</td>
+                  <td>1/1</td>
+                  <td>股性偏强</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/3/3</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数5次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：装修装饰；板块内封板排序第1，属于日内前排；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏强：涨停样本3，次日开盘有溢价率66.7%，均值1.6%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="mid">
+                  <td>炸板</td>
+                  <td class="code">603214</td>
+                  <td>爱婴室</td>
+                  <td>0</td>
+                  <td>5.0%</td>
+                  <td>09:25:01</td>
+                  <td>2</td>
+                  <td>-4.5%</td>
+                  <td>专业连锁</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag mid">中：需看集合竞价承接</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/3/3</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：专业连锁；板块内封板排序第1，属于日内前排；图形新高或强势池新高；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">000923</td>
+                  <td>河钢资源</td>
+                  <td>0</td>
+                  <td>7.0%</td>
+                  <td>10:08:42</td>
+                  <td>2</td>
+                  <td>-2.7%</td>
+                  <td>冶钢原料</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：冶钢原料；板块内封板排序第1，属于日内前排；图形新高或强势池新高；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">000988</td>
+                  <td>华工科技</td>
+                  <td>0</td>
+                  <td>8.2%</td>
+                  <td>09:30:03</td>
+                  <td>4</td>
+                  <td>-1.6%</td>
+                  <td>自动化设</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">可打但炸板/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数4次，封板稳定性一般；换手处于可承接区间；成交额较大，具备市场辨识度；题材/行业热度一般：自动化设；板块内封板排序第1，属于日内前排；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">002172</td>
+                  <td>澳洋健康</td>
+                  <td>3</td>
+                  <td>-4.1%</td>
+                  <td>09:30:00</td>
+                  <td>1</td>
+                  <td>-12.9%</td>
+                  <td>医疗服务</td>
+                  <td>1/1</td>
+                  <td>股性中性</td>
+                  <td>6/0.0%</td>
+                  <td><span class="tag bad">炸板失败/不能打</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>-0.91亿</td>
+                  <td>0.23亿</td>
+                  <td>成都北一环:国泰海通证券股份有限公司成都北一环路证券营业部</td>
+                  <td>6/5/5</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；3板以上有辨识度；炸板次数1次，可接受但需看承接；换手过高，次日抛压风险上升；题材/行业热度一般：医疗服务；板块内封板排序第1，属于日内前排；图形新高或强势池新高；炸板后回落较深，失败属性更重；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性中性：涨停样本8，次日开盘有溢价率57.1%；历史封板稳定性一般：涨停/炸板样本中未封住比例75.0%</td>
+                  <td>盘后龙虎榜净卖出0.91亿，次日风险上升；机构净买入0.23亿；关注席位上榜：成都北一环:国泰海通证券股份有限公司成都北一环路证券营业部；卖方集中度明显高于买方</td>
+                  <td>前一交易日本行业涨停样本缺失；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">603115</td>
+                  <td>海星股份</td>
+                  <td>0</td>
+                  <td>7.0%</td>
+                  <td>10:18:48</td>
+                  <td>1</td>
+                  <td>-2.7%</td>
+                  <td>元件</td>
+                  <td>2/4</td>
+                  <td>A杀血统高</td>
+                  <td>3/33.3%</td>
+                  <td><span class="tag bad">不能打板</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>6/8/8</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：元件；板块内封板排序第2，属于日内前排；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性偏弱：涨停样本5，次日开盘有溢价率20.0%，均值-0.7%；历史封板稳定性一般：涨停/炸板样本中未封住比例60.0%；A杀血统指数偏高：历史炸板样本3，炸板后A杀率33.3%；历史炸板A杀率&gt;30%，按股性记忆强制禁止打板</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">601869</td>
+                  <td>长飞光纤</td>
+                  <td>0</td>
+                  <td>6.0%</td>
+                  <td>09:39:49</td>
+                  <td>1</td>
+                  <td>-3.6%</td>
+                  <td>通信设备</td>
+                  <td>5/6</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>5/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；成交额较大，具备市场辨识度；所属行业在今日涨停/炸板热度前排：通信设备；板块内封板排序第5，不是日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">603663</td>
+                  <td>三祥新材</td>
+                  <td>0</td>
+                  <td>7.2%</td>
+                  <td>09:38:40</td>
+                  <td>5</td>
+                  <td>-2.5%</td>
+                  <td>化学原料</td>
+                  <td>2/2</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>5/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数5次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：化学原料；板块内封板排序第2，属于日内前排；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">002913</td>
+                  <td>奥士康</td>
+                  <td>0</td>
+                  <td>9.9%</td>
+                  <td>10:36:03</td>
+                  <td>8</td>
+                  <td>-0.1%</td>
+                  <td>元件</td>
+                  <td>3/4</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag bad">炸板失败/不能打</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>5/5/5</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数8次，封板分歧大；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：元件；板块内封板排序第3，属于日内前排；图形新高或强势池新高；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">601126</td>
+                  <td>四方股份</td>
+                  <td>0</td>
+                  <td>7.6%</td>
+                  <td>10:01:59</td>
+                  <td>2</td>
+                  <td>-2.2%</td>
+                  <td>电网设备</td>
+                  <td>4/6</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag bad">炸板失败/不能打</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>5/5/5</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；成交额较大，具备市场辨识度；所属行业在今日涨停/炸板热度前排：电网设备；板块内封板排序第4，不是日内前排；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">001316</td>
+                  <td>润贝航科</td>
+                  <td>0</td>
+                  <td>4.9%</td>
+                  <td>13:18:42</td>
+                  <td>2</td>
+                  <td>-4.7%</td>
+                  <td>炼化及贸</td>
+                  <td>2/2</td>
+                  <td>样本不足</td>
+                  <td>1/0.0%</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：炼化及贸；板块内封板排序第2，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">002886</td>
+                  <td>沃特股份</td>
+                  <td>0</td>
+                  <td>4.0%</td>
+                  <td>09:42:51</td>
+                  <td>1</td>
+                  <td>-5.4%</td>
+                  <td>塑料</td>
+                  <td>2/2</td>
+                  <td>股性中性</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手过高，次日抛压风险上升；题材/行业热度一般：塑料；板块内封板排序第2，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性中性：涨停样本5，次日开盘有溢价率40.0%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">300913</td>
+                  <td>兆龙互连</td>
+                  <td>0</td>
+                  <td>14.7%</td>
+                  <td>09:45:39</td>
+                  <td>2</td>
+                  <td>-4.4%</td>
+                  <td>通信设备</td>
+                  <td>6/6</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数2次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：通信设备；板块内封板排序第6，不是日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">600776</td>
+                  <td>东方通信</td>
+                  <td>0</td>
+                  <td>5.3%</td>
+                  <td>09:37:43</td>
+                  <td>1</td>
+                  <td>-4.3%</td>
+                  <td>通信设备</td>
+                  <td>4/6</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；所属行业在今日涨停/炸板热度前排：通信设备；板块内封板排序第4，不是日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">603066</td>
+                  <td>音飞储存</td>
+                  <td>0</td>
+                  <td>5.0%</td>
+                  <td>10:21:35</td>
+                  <td>1</td>
+                  <td>-4.6%</td>
+                  <td>物流</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：物流；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="mid" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">605277</td>
+                  <td>新亚电子</td>
+                  <td>0</td>
+                  <td>5.9%</td>
+                  <td>09:44:22</td>
+                  <td>3</td>
+                  <td>-3.7%</td>
+                  <td>消费电子</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag mid">炸板可接受/反包观察</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>4/4/4</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数3次，封板稳定性一般；换手处于可承接区间；题材/行业热度一般：消费电子；板块内封板排序第1，属于日内前排；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">002910</td>
+                  <td>庄园牧场</td>
+                  <td>0</td>
+                  <td>1.6%</td>
+                  <td>09:33:12</td>
+                  <td>1</td>
+                  <td>-7.7%</td>
+                  <td>饮料乳品</td>
+                  <td>1/1</td>
+                  <td>样本不足</td>
+                  <td>/缺失</td>
+                  <td><span class="tag bad">炸板失败/不能打</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>3/5/5</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手处于可承接区间；题材/行业热度一般：饮料乳品；板块内封板排序第1，属于日内前排；炸板后回落较深，失败属性更重；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">603285</td>
+                  <td>键邦股份</td>
+                  <td>0</td>
+                  <td>6.9%</td>
+                  <td>10:00:34</td>
+                  <td>3</td>
+                  <td>-2.8%</td>
+                  <td>化学制品</td>
+                  <td>2/3</td>
+                  <td>样本不足</td>
+                  <td>0/缺失</td>
+                  <td><span class="tag bad">炸板失败/不能打</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>3/5/5</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板偏晚，需要板块发酵、股性或大环境确认；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数3次，封板稳定性一般；题材/行业热度一般：化学制品；板块内封板排序第2，属于日内前排；炸板后收盘距涨停价较近，仍有反包观察价值；今日涨停家数尚可；今日炸板率偏高，次日溢价打折</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；同股历史涨停溢价样本不足；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                
+                <tr data-pool="炸板" data-quality="bad" data-risk="bad">
+                  <td>炸板</td>
+                  <td class="code">603330</td>
+                  <td>天洋新材</td>
+                  <td>0</td>
+                  <td>1.1%</td>
+                  <td>09:33:31</td>
+                  <td>1</td>
+                  <td>-8.1%</td>
+                  <td>塑料</td>
+                  <td>1/2</td>
+                  <td>股性中性</td>
+                  <td>2/0.0%</td>
+                  <td><span class="tag bad">炸板失败/不能打</span></td>
+                  <td><span class="tag bad">高：次日无溢价风险高</span></td>
+                  <td><span class="tag mid">待验证/行情缺失</span></td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td>缺失</td>
+                  <td></td>
+                  <td>2/6/6</td>
+                  <td>炸板样本：不直接判错，单独看炸板质量；大环境：情绪退潮，只能做前排或强辨识度，后排回避；指数环境：指数下跌；首次封板在10:30前，只作为前排证据之一；首板/低板位溢价弹性需依赖题材和封板质量；炸板次数1次，可接受但需看承接；换手过高，次日抛压风险上升；题材/行业热度一般：塑料；板块内封板排序第1，属于日内前排；炸板后回落较深，失败属性更重；今日涨停家数尚可；今日炸板率偏高，次日溢价打折；三年股性中性：涨停样本6，次日开盘有溢价率50.0%</td>
+                  <td></td>
+                  <td>前一交易日本行业涨停样本缺失；龙虎榜未上榜或未匹配；仅可作为盘后缺失项；T+1行情缺失或未收盘：2026-09-10</td>
+                </tr>
+                </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="footer">T+1 尚未发生或行情缺失时，实际标签保持“待验证/缺失”，不猜测。不是投资建议。</div>
+</main>
+<script>
+var q = document.getElementById('q');
+var buttons = document.querySelectorAll('button');
+var state = { pool:'all', quality:'all', risk:'all' };
+function apply() {
+  var text = (q.value || '').toLowerCase();
+  document.querySelectorAll('#stocks tbody tr').forEach(function(tr) {
+    var okText = !text || tr.innerText.toLowerCase().indexOf(text) >= 0;
+    var okPool = state.pool === 'all' || tr.dataset.pool === state.pool;
+    var okQuality = state.quality === 'all' || tr.dataset.quality === state.quality;
+    var okRisk = state.risk === 'all' || tr.dataset.risk === state.risk;
+    tr.style.display = okText && okPool && okQuality && okRisk ? '' : 'none';
+  });
+}
+q.addEventListener('input', apply);
+buttons.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    if (btn.dataset.filter === 'all') state = { pool:'all', quality:'all', risk:'all' };
+    if (btn.dataset.pool) state.pool = state.pool === btn.dataset.pool ? 'all' : btn.dataset.pool;
+    if (btn.dataset.quality) state.quality = state.quality === btn.dataset.quality ? 'all' : btn.dataset.quality;
+    if (btn.dataset.risk) state.risk = state.risk === btn.dataset.risk ? 'all' : btn.dataset.risk;
+    buttons.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    apply();
+  });
+});
+</script>
+</body>
+</html>

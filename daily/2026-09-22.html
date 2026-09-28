@@ -36,10 +36,11 @@
     button { cursor:pointer; }
     button.active { border-color:var(--gold); }
     .table-wrap { max-height:760px; overflow:auto; border:1px solid var(--line); border-radius:8px; }
-    table { width:100%; border-collapse:collapse; min-width:1980px; font-size:12px; }
+    table { width:100%; border-collapse:collapse; min-width:2460px; font-size:12px; }
     th,td { padding:8px 9px; border-bottom:1px solid #17233a; text-align:left; vertical-align:top; }
     th { position:sticky; top:0; background:#10182b; z-index:1; color:#9fb2d2; white-space:nowrap; }
     .code { font-family:Consolas, monospace; color:#b7d5ff; }
+    .reason { min-width:300px; max-width:520px; color:#c6d2e6; white-space:normal; }
     .tag { display:inline-block; border-radius:999px; padding:3px 8px; white-space:nowrap; }
     .tag.good { color:#91f2c7; background:rgba(52,211,153,.13); border:1px solid rgba(52,211,153,.35); }
     .tag.mid { color:#ffd67a; background:rgba(240,180,41,.12); border:1px solid rgba(240,180,41,.35); }
@@ -54,7 +55,7 @@
     <h1>2026-09-22 涨停/炸板打板决策</h1>
     <p class="lead">本页回答两个不同问题：今天盘中打板/炸板动作是否合理，以及盘后看明天是否可能没有溢价。龙虎榜只作为盘后次日风险特征，不倒推盘中打板信号。</p>
     <div class="meta">
-      <span>生成时间：2026-09-26 09:12:22</span>
+      <span>生成时间：2026-09-26 09:11:04</span>
       <span>明细CSV：同目录 CSV 文件，首页提供下载入口</span>
       <span>题材热度：家居用品:5；出版:4；元件:4；化学制药:3；广告营销:3；IT服务Ⅱ:3；半导体:3；计算机设:3</span>
     </div>
@@ -128,7 +129,7 @@
     <div class="table-wrap">
       <table id="stocks">
         <thead><tr>
-          <th>池</th><th>代码</th><th>名称</th><th>板位</th><th>涨跌幅</th><th>首次封板</th><th>炸板</th><th>距涨停</th><th>行业</th><th>板块排序</th><th>三年股性</th><th>炸板A杀率</th>
+          <th>池</th><th>代码</th><th>名称</th><th>涨跌幅</th><th>成交金额</th><th>连板数</th><th>几天几板</th><th>昨日涨停时间</th><th>首次封板</th><th>开板次数</th><th>涨停原因</th><th>行业</th><th>板块排序</th><th>三年股性</th><th>炸板A杀率</th>
           <th>动作结论</th><th>次日风险</th><th>实际标签</th><th>T+1开盘</th><th>T+1最高</th><th>T+1收盘</th><th>扣费后开盘</th>
           <th>LHB净买</th><th>机构净买</th><th>关注席位</th><th>分数(动作/盘中风险/盘后风险)</th><th>盘中原因</th><th>盘后风险备注</th><th>数据缺口</th>
         </tr></thead>
@@ -137,11 +138,14 @@
                   <td>涨停</td>
                   <td class="code">600664</td>
                   <td>哈药股份</td>
-                  <td>2</td>
                   <td>10.1%</td>
+                  <td>27.79亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:32:20</td>
                   <td>09:31:25</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>化学制药</td>
                   <td>2/3</td>
                   <td>股性偏强</td>
@@ -166,11 +170,14 @@
                   <td>涨停</td>
                   <td class="code">001216</td>
                   <td>华瓷股份</td>
-                  <td>6</td>
                   <td>10.0%</td>
+                  <td>0.48亿</td>
+                  <td>6</td>
+                  <td>6/6</td>
+                  <td>09:25:00</td>
                   <td>09:25:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>家居用品</td>
                   <td>1/5</td>
                   <td>股性偏强</td>
@@ -195,11 +202,14 @@
                   <td>涨停</td>
                   <td class="code">001234</td>
                   <td>泰慕士</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>1.26亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>10:05:12</td>
                   <td>09:30:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>服装家纺</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -224,11 +234,14 @@
                   <td>涨停</td>
                   <td class="code">000910</td>
                   <td>大亚圣象</td>
-                  <td>3</td>
                   <td>10.1%</td>
+                  <td>3.73亿</td>
+                  <td>3</td>
+                  <td>3/3</td>
+                  <td>14:11:15</td>
                   <td>13:12:15</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>家居用品</td>
                   <td>5/5</td>
                   <td>样本不足</td>
@@ -253,11 +266,14 @@
                   <td>涨停</td>
                   <td class="code">603230</td>
                   <td>内蒙新华</td>
-                  <td>5</td>
                   <td>10.0%</td>
+                  <td>6.22亿</td>
+                  <td>5</td>
+                  <td>5/5</td>
+                  <td>09:37:11</td>
                   <td>09:34:36</td>
                   <td>3</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>出版</td>
                   <td>3/4</td>
                   <td>股性偏强</td>
@@ -282,11 +298,14 @@
                   <td>涨停</td>
                   <td class="code">603221</td>
                   <td>爱丽家居</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>4.96亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:46:33</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>家居用品</td>
                   <td>3/5</td>
                   <td>A杀血统高</td>
@@ -311,11 +330,14 @@
                   <td>涨停</td>
                   <td class="code">000607</td>
                   <td>华媒控股</td>
-                  <td>2</td>
                   <td>9.9%</td>
+                  <td>1.00亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:25:00</td>
                   <td>09:25:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>广告营销</td>
                   <td>1/3</td>
                   <td>样本不足</td>
@@ -340,11 +362,14 @@
                   <td>涨停</td>
                   <td class="code">000504</td>
                   <td>南华生物</td>
-                  <td>4</td>
                   <td>10.0%</td>
+                  <td>0.71亿</td>
+                  <td>4</td>
+                  <td>4/4</td>
+                  <td>09:25:00</td>
                   <td>09:25:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>医疗服务</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -369,11 +394,14 @@
                   <td>涨停</td>
                   <td class="code">001317</td>
                   <td>三羊马</td>
-                  <td>3</td>
                   <td>10.0%</td>
+                  <td>4.94亿</td>
+                  <td>3</td>
+                  <td>3/3</td>
+                  <td>13:13:36</td>
                   <td>09:32:18</td>
                   <td>2</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>铁路公路</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -398,11 +426,14 @@
                   <td>涨停</td>
                   <td class="code">600503</td>
                   <td>华丽家族</td>
-                  <td>2</td>
                   <td>9.9%</td>
+                  <td>4.82亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>11:14:57</td>
                   <td>14:44:31</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>房地产开</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -427,11 +458,14 @@
                   <td>涨停</td>
                   <td class="code">601811</td>
                   <td>新华文轩</td>
-                  <td>3</td>
                   <td>10.0%</td>
+                  <td>0.68亿</td>
+                  <td>3</td>
+                  <td>3/3</td>
+                  <td>10:10:48</td>
                   <td>09:25:02</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>出版</td>
                   <td>2/4</td>
                   <td>样本不足</td>
@@ -456,11 +490,14 @@
                   <td>涨停</td>
                   <td class="code">603636</td>
                   <td>南威软件</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>1.37亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>14:17:39</td>
                   <td>09:25:02</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>IT服务Ⅱ</td>
                   <td>1/3</td>
                   <td>样本不足</td>
@@ -485,11 +522,14 @@
                   <td>涨停</td>
                   <td class="code">002178</td>
                   <td>延华智能</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>6.79亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:33:48</td>
                   <td>09:39:12</td>
                   <td>2</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>软件开发</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -514,11 +554,14 @@
                   <td>涨停</td>
                   <td class="code">002301</td>
                   <td>齐心集团</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.47亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:55:18</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>文娱用品</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -543,11 +586,14 @@
                   <td>涨停</td>
                   <td class="code">002614</td>
                   <td>奥佳华</td>
-                  <td>2</td>
                   <td>10.1%</td>
+                  <td>0.83亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:30:00</td>
                   <td>09:25:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>其他家电</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -572,11 +618,14 @@
                   <td>涨停</td>
                   <td class="code">600825</td>
                   <td>新华传媒</td>
-                  <td>2</td>
                   <td>9.9%</td>
+                  <td>0.22亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:25:02</td>
                   <td>09:25:02</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>出版</td>
                   <td>1/4</td>
                   <td>样本不足</td>
@@ -601,11 +650,14 @@
                   <td>涨停</td>
                   <td class="code">603068</td>
                   <td>博通集成</td>
-                  <td>3</td>
                   <td>10.0%</td>
+                  <td>13.75亿</td>
+                  <td>3</td>
+                  <td>3/3</td>
+                  <td>13:08:06</td>
                   <td>09:56:19</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>半导体</td>
                   <td>3/3</td>
                   <td>股性中性</td>
@@ -630,11 +682,14 @@
                   <td>涨停</td>
                   <td class="code">002303</td>
                   <td>美盈森</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>4.50亿</td>
+                  <td>2</td>
+                  <td>5/3</td>
+                  <td>09:30:15</td>
                   <td>09:30:00</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>包装印刷</td>
                   <td>1/1</td>
                   <td>股性偏弱</td>
@@ -659,11 +714,14 @@
                   <td>涨停</td>
                   <td class="code">605178</td>
                   <td>时空科技</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.87亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:59:37</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>专业工程</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -688,11 +746,14 @@
                   <td>涨停</td>
                   <td class="code">605218</td>
                   <td>伟时电子</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>1.73亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:30:17</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>光学光电</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -717,11 +778,14 @@
                   <td>涨停</td>
                   <td class="code">002259</td>
                   <td>升达林业</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>3.05亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>13:52:33</td>
                   <td>10:24:09</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>燃气Ⅱ</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -746,11 +810,14 @@
                   <td>涨停</td>
                   <td class="code">002757</td>
                   <td>南兴股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>7.62亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>10:29:36</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>专用设备</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -775,11 +842,14 @@
                   <td>涨停</td>
                   <td class="code">600418</td>
                   <td>江淮汽车</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>29.14亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>14:14:04</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>商用车</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -804,11 +874,14 @@
                   <td>涨停</td>
                   <td class="code">600743</td>
                   <td>华远控股</td>
-                  <td>2</td>
                   <td>9.9%</td>
+                  <td>0.23亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:25:00</td>
                   <td>09:25:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>房地产服</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -833,11 +906,14 @@
                   <td>涨停</td>
                   <td class="code">603020</td>
                   <td>爱普股份</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>3.53亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>13:08:03</td>
                   <td>09:32:46</td>
                   <td>5</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>化学制品</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -862,11 +938,14 @@
                   <td>涨停</td>
                   <td class="code">605179</td>
                   <td>一鸣食品</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>6.89亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>10:43:02</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>饮料乳品</td>
                   <td>1/1</td>
                   <td>股性偏强</td>
@@ -891,11 +970,14 @@
                   <td>涨停</td>
                   <td class="code">605258</td>
                   <td>协和电子</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>3.14亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>11:27:13</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>元件</td>
                   <td>4/4</td>
                   <td>样本不足</td>
@@ -920,11 +1002,14 @@
                   <td>涨停</td>
                   <td class="code">300110</td>
                   <td>华仁药业</td>
-                  <td>2</td>
                   <td>20.1%</td>
+                  <td>12.85亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>13:06:33</td>
                   <td>10:50:21</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>化学制药</td>
                   <td>3/3</td>
                   <td>样本不足</td>
@@ -949,11 +1034,14 @@
                   <td>涨停</td>
                   <td class="code">600403</td>
                   <td>大有能源</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>7.93亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>13:02:04</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>煤炭开采</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -978,11 +1066,14 @@
                   <td>涨停</td>
                   <td class="code">000595</td>
                   <td>新能股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.92亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>13:52:03</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>电力</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -1007,11 +1098,14 @@
                   <td>涨停</td>
                   <td class="code">002290</td>
                   <td>禾盛新材</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.70亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:25:00</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>家电零部</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -1036,11 +1130,14 @@
                   <td>涨停</td>
                   <td class="code">002564</td>
                   <td>天沃科技</td>
-                  <td>1</td>
                   <td>10.1%</td>
+                  <td>1.37亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:34:54</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>专用设备</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -1065,11 +1162,14 @@
                   <td>涨停</td>
                   <td class="code">600770</td>
                   <td>综艺股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>1.35亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:25:01</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>综合Ⅱ</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1094,11 +1194,14 @@
                   <td>涨停</td>
                   <td class="code">603598</td>
                   <td>引力传媒</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>6.25亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:47:14</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>广告营销</td>
                   <td>3/3</td>
                   <td>样本不足</td>
@@ -1123,11 +1226,14 @@
                   <td>涨停</td>
                   <td class="code">000756</td>
                   <td>新华制药</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>15.63亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:30:51</td>
                   <td>09:25:00</td>
                   <td>7</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>化学制药</td>
                   <td>1/3</td>
                   <td>样本不足</td>
@@ -1152,11 +1258,14 @@
                   <td>涨停</td>
                   <td class="code">002313</td>
                   <td>日海智能</td>
-                  <td>1</td>
                   <td>10.1%</td>
+                  <td>1.66亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:54:42</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>通信设备</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1181,11 +1290,14 @@
                   <td>涨停</td>
                   <td class="code">600641</td>
                   <td>先导基电</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>25.52亿</td>
+                  <td>1</td>
+                  <td>4/2</td>
+                  <td>—</td>
                   <td>09:30:58</td>
                   <td>3</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>半导体</td>
                   <td>1/3</td>
                   <td>股性偏强</td>
@@ -1210,11 +1322,14 @@
                   <td>涨停</td>
                   <td class="code">603580</td>
                   <td>艾艾精工</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>6.36亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>09:42:31</td>
                   <td>09:46:08</td>
                   <td>3</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>塑料</td>
                   <td>1/2</td>
                   <td>股性中性</td>
@@ -1239,11 +1354,14 @@
                   <td>涨停</td>
                   <td class="code">600721</td>
                   <td>百花医药</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>27.39亿</td>
+                  <td>2</td>
+                  <td>4/3</td>
+                  <td>10:02:07</td>
                   <td>10:47:02</td>
                   <td>5</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>医疗服务</td>
                   <td>2/2</td>
                   <td>股性偏强</td>
@@ -1268,11 +1386,14 @@
                   <td>涨停</td>
                   <td class="code">601949</td>
                   <td>中国出版</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>5.68亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>10:22:01</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>出版</td>
                   <td>4/4</td>
                   <td>A杀血统高</td>
@@ -1297,11 +1418,14 @@
                   <td>涨停</td>
                   <td class="code">600815</td>
                   <td>厦工股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>4.29亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>13:00:02</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>工程机械</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -1326,11 +1450,14 @@
                   <td>涨停</td>
                   <td class="code">000560</td>
                   <td>我爱我家</td>
-                  <td>2</td>
                   <td>10.0%</td>
+                  <td>14.13亿</td>
+                  <td>2</td>
+                  <td>2/2</td>
+                  <td>13:06:30</td>
                   <td>09:32:03</td>
                   <td>6</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>房地产服</td>
                   <td>2/2</td>
                   <td>A杀血统高</td>
@@ -1355,11 +1482,14 @@
                   <td>涨停</td>
                   <td class="code">001322</td>
                   <td>箭牌家居</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>1.11亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:51:15</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>家居用品</td>
                   <td>4/5</td>
                   <td>样本不足</td>
@@ -1384,11 +1514,14 @@
                   <td>涨停</td>
                   <td class="code">002467</td>
                   <td>二六三</td>
-                  <td>1</td>
                   <td>9.9%</td>
+                  <td>5.18亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:32:45</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>通信服务</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1413,11 +1546,14 @@
                   <td>涨停</td>
                   <td class="code">300324</td>
                   <td>旋极信息</td>
-                  <td>1</td>
                   <td>20.0%</td>
+                  <td>11.63亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:55:09</td>
                   <td>2</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>计算机设</td>
                   <td>2/3</td>
                   <td>样本不足</td>
@@ -1442,11 +1578,14 @@
                   <td>涨停</td>
                   <td class="code">603216</td>
                   <td>梦天家居</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.13亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:36:23</td>
                   <td>3</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>家居用品</td>
                   <td>2/5</td>
                   <td>样本不足</td>
@@ -1471,11 +1610,14 @@
                   <td>涨停</td>
                   <td class="code">002238</td>
                   <td>天威视讯</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>0.74亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>10:09:36</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>电视广播</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1500,11 +1642,14 @@
                   <td>涨停</td>
                   <td class="code">002672</td>
                   <td>东江环保</td>
-                  <td>1</td>
                   <td>10.1%</td>
+                  <td>0.65亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>13:11:15</td>
                   <td>0</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>环境治理</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -1529,11 +1674,14 @@
                   <td>涨停</td>
                   <td class="code">301234</td>
                   <td>五洲医疗</td>
-                  <td>1</td>
                   <td>20.0%</td>
+                  <td>6.83亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:56:39</td>
                   <td>13</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>医疗器械</td>
                   <td>1/1</td>
                   <td>股性偏强</td>
@@ -1558,11 +1706,14 @@
                   <td>涨停</td>
                   <td class="code">603903</td>
                   <td>中持股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.89亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>11:23:36</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>环境治理</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -1587,11 +1738,14 @@
                   <td>涨停</td>
                   <td class="code">001268</td>
                   <td>联合精密</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.43亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:43:30</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>家电零部</td>
                   <td>2/2</td>
                   <td>股性偏弱</td>
@@ -1616,11 +1770,14 @@
                   <td>涨停</td>
                   <td class="code">605058</td>
                   <td>澳弘电子</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>13.03亿</td>
+                  <td>1</td>
+                  <td>8/6</td>
+                  <td>—</td>
                   <td>11:22:27</td>
                   <td>5</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高且近期多次涨停</td>
                   <td>元件</td>
                   <td>3/4</td>
                   <td>股性中性</td>
@@ -1645,11 +1802,14 @@
                   <td>涨停</td>
                   <td class="code">002141</td>
                   <td>贤丰控股</td>
-                  <td>1</td>
                   <td>10.1%</td>
+                  <td>20.52亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:35:45</td>
                   <td>7</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>元件</td>
                   <td>2/4</td>
                   <td>A杀血统高</td>
@@ -1674,11 +1834,14 @@
                   <td>涨停</td>
                   <td class="code">000676</td>
                   <td>智度股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>12.78亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:30:33</td>
                   <td>8</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>广告营销</td>
                   <td>2/3</td>
                   <td>样本不足</td>
@@ -1703,11 +1866,14 @@
                   <td>涨停</td>
                   <td class="code">001260</td>
                   <td>坤泰股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>1.20亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>11:02:54</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>汽车零部</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1732,11 +1898,14 @@
                   <td>涨停</td>
                   <td class="code">001266</td>
                   <td>宏英智能</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>3.25亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:34:15</td>
                   <td>3</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>自动化设</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1761,11 +1930,14 @@
                   <td>涨停</td>
                   <td class="code">002912</td>
                   <td>中新赛克</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>7.89亿</td>
+                  <td>1</td>
+                  <td>9/5</td>
+                  <td>—</td>
                   <td>13:55:42</td>
                   <td>2</td>
-                  <td>缺失</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>计算机设</td>
                   <td>3/3</td>
                   <td>股性偏强</td>
@@ -1790,11 +1962,14 @@
                   <td>涨停</td>
                   <td class="code">605398</td>
                   <td>新炬网络</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>2.27亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>10:20:52</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>IT服务Ⅱ</td>
                   <td>3/3</td>
                   <td>样本不足</td>
@@ -1819,11 +1994,14 @@
                   <td>涨停</td>
                   <td class="code">002768</td>
                   <td>国恩股份</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>9.97亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>13:05:09</td>
                   <td>5</td>
-                  <td>缺失</td>
+                  <td class="reason">60日新高</td>
                   <td>塑料</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -1848,11 +2026,14 @@
                   <td>涨停</td>
                   <td class="code">920526</td>
                   <td>凯华材料</td>
-                  <td>1</td>
                   <td>30.0%</td>
+                  <td>3.34亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>09:58:51</td>
                   <td>5</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>电子化学</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -1877,11 +2058,14 @@
                   <td>涨停</td>
                   <td class="code">600479</td>
                   <td>千金药业</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>12.55亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>14:55:58</td>
                   <td>1</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>中药Ⅱ</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -1906,11 +2090,14 @@
                   <td>涨停</td>
                   <td class="code">603039</td>
                   <td>泛微网络</td>
-                  <td>1</td>
                   <td>10.0%</td>
+                  <td>14.40亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>10:32:29</td>
                   <td>3</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>软件开发</td>
                   <td>2/2</td>
                   <td>A杀血统高</td>
@@ -1935,11 +2122,14 @@
                   <td>涨停</td>
                   <td class="code">688781</td>
                   <td>视涯科技-UW</td>
-                  <td>1</td>
                   <td>20.0%</td>
+                  <td>5.76亿</td>
+                  <td>1</td>
+                  <td>1/1</td>
+                  <td>—</td>
                   <td>11:00:38</td>
                   <td>8</td>
-                  <td>缺失</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>光学光电</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -1964,11 +2154,14 @@
                   <td>炸板</td>
                   <td class="code">001389</td>
                   <td>广合科技</td>
-                  <td>2</td>
                   <td>6.8%</td>
+                  <td>55.43亿</td>
+                  <td>2</td>
+                  <td>2/1</td>
+                  <td>13:48:39</td>
                   <td>09:30:33</td>
                   <td>12</td>
-                  <td>-2.9%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>元件</td>
                   <td>1/4</td>
                   <td>样本不足</td>
@@ -1993,11 +2186,14 @@
                   <td>炸板</td>
                   <td class="code">000066</td>
                   <td>中国长城</td>
-                  <td>0</td>
                   <td>6.9%</td>
+                  <td>66.39亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>09:25:00</td>
                   <td>2</td>
-                  <td>-2.8%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>计算机设</td>
                   <td>1/3</td>
                   <td>样本不足</td>
@@ -2022,11 +2218,14 @@
                   <td>炸板</td>
                   <td class="code">002827</td>
                   <td>高争民爆</td>
-                  <td>0</td>
                   <td>4.5%</td>
+                  <td>16.50亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>09:58:03</td>
                   <td>1</td>
-                  <td>-5.0%</td>
+                  <td class="reason">60日新高</td>
                   <td>化学制品</td>
                   <td>2/2</td>
                   <td>股性偏强</td>
@@ -2051,11 +2250,14 @@
                   <td>炸板</td>
                   <td class="code">600630</td>
                   <td>龙头股份</td>
-                  <td>4</td>
                   <td>3.9%</td>
+                  <td>13.51亿</td>
+                  <td>4</td>
+                  <td>4/3</td>
+                  <td>11:01:55</td>
                   <td>09:32:08</td>
                   <td>1</td>
-                  <td>-5.5%</td>
+                  <td class="reason">近期多次涨停</td>
                   <td>服装家纺</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -2080,11 +2282,14 @@
                   <td>炸板</td>
                   <td class="code">603893</td>
                   <td>瑞芯微</td>
-                  <td>0</td>
                   <td>10.0%</td>
+                  <td>54.63亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>09:52:45</td>
                   <td>23</td>
-                  <td>0.0%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>半导体</td>
                   <td>2/3</td>
                   <td>样本不足</td>
@@ -2109,11 +2314,14 @@
                   <td>炸板</td>
                   <td class="code">603256</td>
                   <td>宏和科技</td>
-                  <td>0</td>
                   <td>6.9%</td>
+                  <td>78.94亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>09:34:44</td>
                   <td>5</td>
-                  <td>-2.8%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>玻璃玻纤</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -2138,11 +2346,14 @@
                   <td>炸板</td>
                   <td class="code">603353</td>
                   <td>和顺石油</td>
-                  <td>0</td>
                   <td>6.7%</td>
+                  <td>7.39亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>09:41:30</td>
                   <td>1</td>
-                  <td>-3.0%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>炼化及贸</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -2167,11 +2378,14 @@
                   <td>炸板</td>
                   <td class="code">600246</td>
                   <td>万通发展</td>
-                  <td>0</td>
                   <td>3.7%</td>
+                  <td>30.45亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:03:25</td>
                   <td>1</td>
-                  <td>-5.7%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>房地产开</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -2196,11 +2410,14 @@
                   <td>炸板</td>
                   <td class="code">688365</td>
                   <td>光云科技</td>
-                  <td>0</td>
                   <td>13.9%</td>
+                  <td>9.19亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:16:11</td>
                   <td>2</td>
-                  <td>-5.1%</td>
+                  <td class="reason">60日新高</td>
                   <td>IT服务Ⅱ</td>
                   <td>2/3</td>
                   <td>样本不足</td>
@@ -2225,11 +2442,14 @@
                   <td>炸板</td>
                   <td class="code">301047</td>
                   <td>义翘神州</td>
-                  <td>0</td>
                   <td>16.1%</td>
+                  <td>24.54亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:15:36</td>
                   <td>5</td>
-                  <td>-3.3%</td>
+                  <td class="reason">60日新高</td>
                   <td>生物制品</td>
                   <td>1/2</td>
                   <td>样本不足</td>
@@ -2254,11 +2474,14 @@
                   <td>炸板</td>
                   <td class="code">600792</td>
                   <td>云煤能源</td>
-                  <td>0</td>
                   <td>5.3%</td>
+                  <td>10.33亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>13:02:21</td>
                   <td>2</td>
-                  <td>-4.3%</td>
+                  <td class="reason">60日新高</td>
                   <td>焦炭Ⅱ</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -2283,11 +2506,14 @@
                   <td>炸板</td>
                   <td class="code">603341</td>
                   <td>龙旗科技</td>
-                  <td>0</td>
                   <td>6.1%</td>
+                  <td>11.98亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:51:13</td>
                   <td>1</td>
-                  <td>-3.5%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>消费电子</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -2312,11 +2538,14 @@
                   <td>炸板</td>
                   <td class="code">605056</td>
                   <td>咸亨国际</td>
-                  <td>0</td>
                   <td>3.4%</td>
+                  <td>2.66亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:18:53</td>
                   <td>1</td>
-                  <td>-6.0%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>通用设备</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -2341,11 +2570,14 @@
                   <td>炸板</td>
                   <td class="code">688105</td>
                   <td>诺唯赞</td>
-                  <td>0</td>
                   <td>15.5%</td>
+                  <td>9.87亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:36:54</td>
                   <td>3</td>
-                  <td>-3.7%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>生物制品</td>
                   <td>2/2</td>
                   <td>样本不足</td>
@@ -2370,11 +2602,14 @@
                   <td>炸板</td>
                   <td class="code">600540</td>
                   <td>新赛股份</td>
-                  <td>0</td>
                   <td>6.7%</td>
+                  <td>8.63亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>11:03:31</td>
                   <td>2</td>
-                  <td>-3.1%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>种植业</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -2399,11 +2634,14 @@
                   <td>炸板</td>
                   <td class="code">003032</td>
                   <td>传智教育</td>
-                  <td>0</td>
                   <td>6.1%</td>
+                  <td>7.64亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:34:33</td>
                   <td>1</td>
-                  <td>-3.6%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>教育</td>
                   <td>1/1</td>
                   <td>A杀血统高</td>
@@ -2428,11 +2666,14 @@
                   <td>炸板</td>
                   <td class="code">002989</td>
                   <td>中天精装</td>
-                  <td>0</td>
                   <td>2.5%</td>
+                  <td>4.39亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>09:45:21</td>
                   <td>1</td>
-                  <td>-6.9%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>装修装饰</td>
                   <td>1/1</td>
                   <td>样本不足</td>
@@ -2457,11 +2698,14 @@
                   <td>炸板</td>
                   <td class="code">002164</td>
                   <td>宁波东力</td>
-                  <td>0</td>
                   <td>5.8%</td>
+                  <td>7.56亿</td>
+                  <td>1</td>
+                  <td>0/0</td>
+                  <td>—</td>
                   <td>10:02:39</td>
                   <td>6</td>
-                  <td>-3.8%</td>
+                  <td class="reason">涨停原因源未提供</td>
                   <td>通用设备</td>
                   <td>1/2</td>
                   <td>A杀血统高</td>
